@@ -1,29 +1,23 @@
-import './styles/App.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import HomePage from './pages/HomePage';
-// import AboutPage from './pages/AboutPage';
-// import ContactPage from './pages/ContactPage';
+import '../styles/About.css'
 
-function App() {
+function About() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="About">
+      <header className="About-header">
         <p>
-          Eva Liu's Space
+          Hi!
         </p>
-        <main>
-        </main>
-        {/* <Router>
-          <Routes>
-            <Route path="/" element={<LofiRoom />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </Router> */}
       </header>
+      <div>
+        <p>
+          I'm Eva Liu!
+          <br/>
+          A software engineer who loves building tools that make complex things simpler. I’ve led projects like the Antimony Web Editor, a web app that helps researchers build biological models more easily, and contributed to the Vscode-Antimony extension, now used by over a thousand people. I co-authored a peer-reviewed paper in Bioinformatics about our work improving modeling tools in systems biology. Whether it’s writing full-stack code, speaking at conferences, or building fun side projects like Pet My Dog, I’m all about creating tech that’s useful and thoughtful.
+        </p>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default About;

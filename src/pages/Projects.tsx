@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import AboutPage from './pages/AboutPage';
 // import ContactPage from './pages/ContactPage';
 
-function App() {
+function Projects() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Projects">
+      <header className="Projects-header">
         <p>
           Eva Liu's Space
         </p>
@@ -26,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+export default Projects;
