@@ -1,0 +1,11 @@
+.ProjectBox {
+  border-radius: 25px;
+  background: #7d5ccb;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+}
+
+.Project-info {
+  height: fit-content;
+}

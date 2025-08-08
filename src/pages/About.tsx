@@ -6,7 +6,7 @@ function About() {
     <div className="About">
       <header className="About-header">
         <p>
-          Hi!
+          About me
         </p>
       </header>
       <div className='About-main'>
