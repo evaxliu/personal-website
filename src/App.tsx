@@ -1,9 +1,9 @@
 import './styles/App.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LofiRoom } from './components/LofiRoom';
 import About from './pages/About';
-import { ProjectBox } from './components/ProjectBox';
+// import { ProjectBox } from './components/ProjectBox';
 // import HomePage from './pages/HomePage';
 // import AboutPage from './pages/AboutPage';
 // import ContactPage from './pages/ContactPage';
