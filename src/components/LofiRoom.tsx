@@ -8,7 +8,7 @@ import { useLoader } from "@react-three/fiber";
 import { Mesh } from "three";
 
 function MeshComponent() {
-  const fileUrl = '/assets/cozy_room.glb';
+  const fileUrl = process.env.PUBLIC_URL + "/assets/cozy_room.glb";
   const mesh = useRef<Mesh>(null!);
   const gltf = useLoader(GLTFLoader, fileUrl);
 
