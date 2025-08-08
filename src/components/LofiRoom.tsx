@@ -14,7 +14,7 @@ function MeshComponent() {
 
   return (
     <mesh ref={mesh} receiveShadow castShadow>
-      <primitive object={gltf.scene} position={[0, -1.75, 0]} />
+      <primitive object={gltf.scene} position={[0, -1, 0]} />
     </mesh>
   );
 }
