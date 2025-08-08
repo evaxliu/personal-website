@@ -6,9 +6,11 @@ import { OrbitControls, OrthographicCamera, SoftShadows, Environment } from "@re
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader } from "@react-three/fiber";
 import { Mesh } from "three";
+import roomUrl from "../assets/cozy_room.glb"; // CRA resolves to /static/media/....glb
+
 
 function MeshComponent() {
-  const fileUrl = process.env.PUBLIC_URL + "/assets/cozy_room.glb";
+  const fileUrl = roomUrl;
   const mesh = useRef<Mesh>(null!);
   const gltf = useLoader(GLTFLoader, fileUrl);
 
