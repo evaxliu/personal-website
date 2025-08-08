@@ -21,11 +21,11 @@ function MeshComponent() {
 
 export function LofiRoom() {
   return (
-    <div className="lofi-container">{/* fills its column via CSS */}
+    <div className="lofi-container">
       <Canvas
         shadows
         orthographic
-        style={{ width: '100%', height: '100%' }}  /* responsive to parent */
+        style={{ width: '100%', height: '100%' }}
       >
         <Environment preset="sunset" background={false} />
         <ambientLight intensity={0.2} color="#ffdcb2" />
