@@ -27,12 +27,18 @@ function App() {
               Projects
             </button>
           </nav>
-          <div className='lofi'>
-            <LofiRoom />
+          <div className='wrapper'>
+            <div id='lofi-room'>
+              <LofiRoom />
+            </div>
+            <div id='about'>
+              <About />
+            </div>
           </div>
+          {/* <div id='project'>
+            <ProjectBox />
+          </div> */}
         </main>
-        <About />
-        <ProjectBox />
         {/* <Router>
           <Routes>
             <Route path="/" element={<LofiRoom />} />
