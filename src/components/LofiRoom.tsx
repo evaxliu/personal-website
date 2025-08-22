@@ -1,41 +1,48 @@
 "use client";
 
 import { useRef } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, OrthographicCamera, SoftShadows, Environment } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Mesh } from "three";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { useLoader } from "@react-three/fiber";
+import { Mesh, TextureLoader } from "three";
+import roomUrl from "../assets/cozy_room.glb"; 
+import '../styles/LofiRoom.css'
 
 function MeshComponent() {
-  const fileUrl = '/assets/lofi_room.glb';
+  const fileUrl = roomUrl;
   const mesh = useRef<Mesh>(null!);
   const gltf = useLoader(GLTFLoader, fileUrl);
+  const textureLoader = new TextureLoader;
 
   return (
-    <mesh ref={mesh} receiveShadow>
-      <primitive object={gltf.scene} position={[0, -3, 0]} />
+    <mesh ref={mesh} receiveShadow castShadow>
+      <primitive object={gltf.scene} position={[0, -1, 0]} />
     </mesh>
   );
 }
 
 export function LofiRoom() {
   return (
-    <div className='flex justify-center items-center h-screen'>
+    <div id="lofi-container">
       <Canvas
         shadows
-        style={{ width: '85vw', height: '85vh' }}
-        camera={{ position: [10, 5, 10] }}
+        orthographic
+        style={{ width: '100%', height: '100%' }}
       >
-        <ambientLight intensity={1.5} color="#ffffff" />
-
+        <Environment preset="sunset" background={false} />
+        <ambientLight intensity={0.2} color="#ffdcb2" />
         <directionalLight
-          castShadow
           position={[5, 10, 5]}
-          intensity={0.5}
-          color="#ffffff"
+          intensity={0.8}
+          color="#ffdcb2"
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-bias={-0.001}
         />
-        <pointLight position={[10, 10, 10]} intensity={0.5} castShadow />
+        <directionalLight position={[-3, 5, -5]} intensity={0.3} color="#ffbfa3" />
+        <SoftShadows size={12} samples={20} focus={0.8} />
         <MeshComponent />
         <OrbitControls
           enableZoom={false}
@@ -44,6 +51,7 @@ export function LofiRoom() {
           minAzimuthAngle={-Math.PI / 10}
           maxAzimuthAngle={Math.PI / 2}
         />
+        <OrthographicCamera makeDefault position={[12, 5, 12]} zoom={90} near={0.1} far={1000} />
       </Canvas>
     </div>
   );
