@@ -2,7 +2,7 @@ name: Build and Deploy (CRA → GitHub Pages)
 
 on:
   push:
-    branches: [ website-layout-setup ]      # deploys current branch
+    branches: [ main ]      # deploys current branch
   workflow_dispatch:
 
 permissions:
