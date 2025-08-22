@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, OrthographicCamera, SoftShadows, Environment } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader } from "@react-three/fiber";
-import { Mesh, TextureLoader } from "three";
+import { Mesh } from "three";
 import roomUrl from "../assets/cozy_room.glb"; 
 import '../styles/LofiRoom.css'
 
@@ -13,7 +13,6 @@ function MeshComponent() {
   const fileUrl = roomUrl;
   const mesh = useRef<Mesh>(null!);
   const gltf = useLoader(GLTFLoader, fileUrl);
-  const textureLoader = new TextureLoader;
 
   return (
     <mesh ref={mesh} receiveShadow castShadow>
