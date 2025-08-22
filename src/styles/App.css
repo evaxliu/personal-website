@@ -43,14 +43,6 @@ button:hover { background-color: #6f5e8f; }
   min-height: 0;
 }
 
-#about {
-  overflow: hidden;
-}
-
-.lofi-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#lofi-room.fade-out {
+    opacity: 0;
 }
