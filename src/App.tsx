@@ -1,6 +1,5 @@
 import './styles/App.css';
-import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import { LofiRoom } from './components/LofiRoom';
 import About from './pages/About';
 // import { ProjectBox } from './components/ProjectBox';
@@ -9,6 +8,16 @@ import About from './pages/About';
 // import ContactPage from './pages/ContactPage';
 
 function App() {
+  const [show, setShow] = useState(false);
+
+  const handleShowClick = () => {
+    setShow(true);
+  }
+  
+  const handleToggleClick = () => {
+    setShow((prevValue) => !prevValue);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,7 +26,7 @@ function App() {
         </p>
         <main>
           <nav>
-            <button>
+            <button onClick={handleShowClick}>
               About
             </button>
             <button>
@@ -31,21 +40,12 @@ function App() {
             <div id='lofi-room'>
               <LofiRoom />
             </div>
-            <div id='about'>
-              <About />
-            </div>
+            {show && (<About />)}
           </div>
           {/* <div id='project'>
             <ProjectBox />
           </div> */}
         </main>
-        {/* <Router>
-          <Routes>
-            <Route path="/" element={<LofiRoom />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </Router> */}
       </header>
     </div>
   );

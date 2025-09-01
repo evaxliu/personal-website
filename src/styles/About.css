@@ -1,27 +1,43 @@
 .About {
-  text-align: center;
-  height: 100%;
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-
 .About-header {
-  color: white;
-  padding: 0%;
-  flex: 0 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .About-main {
-  color: white;
-  font-size: calc(5px + 2vmin);
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 90%;
-  max-width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  margin: 0 auto;
+  font-size: calc(12px + 0.8vmin);
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Mobile: adjust About */
+@media (max-width: 768px) {
+  .About {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .About-header {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .About-main {
+    font-size: 1rem;
+    gap: 12px;
+  }
 }
