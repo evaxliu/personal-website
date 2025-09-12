@@ -8,14 +8,10 @@ import About from './pages/About';
 // import ContactPage from './pages/ContactPage';
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [ showHide, setShowHide ] = useState(false);
 
-  const handleShowClick = () => {
-    setShow(true);
-  }
-  
-  const handleToggleClick = () => {
-    setShow((prevValue) => !prevValue);
+  const handleToggle = () => {
+    setShowHide(!showHide)
   }
 
   return (
@@ -26,7 +22,7 @@ function App() {
         </p>
         <main>
           <nav>
-            <button onClick={handleShowClick}>
+            <button onClick={handleToggle}>
               About
             </button>
             <button>
@@ -40,7 +36,7 @@ function App() {
             <div id='lofi-room'>
               <LofiRoom />
             </div>
-            {show && (<About />)}
+            {showHide && (<About />)}
           </div>
           {/* <div id='project'>
             <ProjectBox />
