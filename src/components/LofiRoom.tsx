@@ -26,7 +26,6 @@ function MeshComponent() {
   const mesh = useRef<Mesh>(null!);
   const gltf = useLoader(GLTFLoader, fileUrl);
 
-  // ✅ Enable shadows on all meshes
   gltf.scene.traverse((child: any) => {
     if (child.isMesh) {
       child.castShadow = true;
@@ -44,8 +43,8 @@ function MeshComponent() {
 export function LofiRoom() {
   return (
     <div id="lofi-container">
-      <Suspense>
-        <Canvas shadows style={{ width: "100%", height: "100%" }}>
+      <Canvas shadows style={{ width: "100%", height: "100%" }}>
+        <Suspense fallback={<Loader/>}>
           <directionalLight
             position={[8, 12, -6]}
             intensity={1.3}
@@ -91,8 +90,8 @@ export function LofiRoom() {
             near={0.1}
             far={1000}
           />
-        </Canvas>
       </Suspense>
+      </Canvas>
     </div>
   );
 }
