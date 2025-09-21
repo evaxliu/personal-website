@@ -19,7 +19,9 @@ button {
   cursor: pointer;
   color: white;
 }
-button:hover { background-color: #6f5e8f; }
+button:hover {
+  background-color: #6f5e8f;
+}
 
 .App-header > main {
   display: flex;
@@ -31,18 +33,33 @@ button:hover { background-color: #6f5e8f; }
   flex: 1 1 auto;
   min-height: 0;
   min-width: 0;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: stretch;
+  gap: 2vw;
 }
 
-#lofi-room, #about {
-  flex: 1 1 50%;
+#lofi-room {
+  flex: 1 1 0;
   min-width: 0;
   min-height: 0;
+  box-sizing: border-box;
 }
 
+/* Mobile: stack vertically */
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  #lofi-room {
+    width: 100%;
+  }
+}
+
+
 #lofi-room.fade-out {
-    opacity: 0;
+  opacity: 0;
 }

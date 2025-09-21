@@ -1,14 +1,35 @@
 import './styles/App.css';
-import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import { LofiRoom } from './components/LofiRoom';
 import About from './pages/About';
+import Projects from './pages/Projects';
+import Experience from './pages/Experience';
+import { motion } from 'framer-motion';
 // import { ProjectBox } from './components/ProjectBox';
 // import HomePage from './pages/HomePage';
 // import AboutPage from './pages/AboutPage';
 // import ContactPage from './pages/ContactPage';
 
 function App() {
+  const [ component, setComponent ] = useState('');
+
+  const handleToggleHome = () => {
+    setComponent('')
+  }
+
+  const handleToggleAbout = () => {
+    setComponent('about')
+  }
+
+  const handleToggleProjects = () => {
+    setComponent('project')
+  }
+
+  const handleToggleExperience = () => {
+    setComponent('experience')
+  }
+  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,13 +38,16 @@ function App() {
         </p>
         <main>
           <nav>
-            <button>
+            <button onClick={handleToggleHome}>
+              Home
+            </button>
+            <button onClick={handleToggleAbout}>
               About
             </button>
-            <button>
+            <button onClick={handleToggleExperience}>
               Experience
             </button>
-            <button>
+            <button onClick={handleToggleProjects}>
               Projects
             </button>
           </nav>
@@ -31,21 +55,22 @@ function App() {
             <div id='lofi-room'>
               <LofiRoom />
             </div>
-            <div id='about'>
-              <About />
-            </div>
+            {component === "about" && (
+              <motion.div
+                key="about"
+                className="about-motion-wrapper"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
+              >
+                <About />
+              </motion.div>
+            )}
+            {component === 'project' && (<Projects />)}
+            {component === 'experience' && (<Experience />)}
           </div>
-          {/* <div id='project'>
-            <ProjectBox />
-          </div> */}
         </main>
-        {/* <Router>
-          <Routes>
-            <Route path="/" element={<LofiRoom />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </Router> */}
       </header>
     </div>
   );
