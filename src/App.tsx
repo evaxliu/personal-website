@@ -67,8 +67,32 @@ function App() {
                 <About />
               </motion.div>
             )}
-            {component === 'project' && (<Projects />)}
-            {component === 'experience' && (<Experience />)}
+
+            {component === 'project' && (
+              <motion.div
+                key="projects"
+                className="proj-motion-wrapper"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Projects />
+              </motion.div>
+            )}
+
+            {component === "experience" && (
+              <motion.div
+                key="experience"
+                className="exp-motion-wrapper"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Experience />
+              </motion.div>
+            )}          
           </div>
         </main>
       </header>
