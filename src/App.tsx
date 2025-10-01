@@ -1,9 +1,6 @@
 import './styles/App.css';
-import React, { useState } from 'react';
 import { LofiRoom } from './components/LofiRoom';
 import About from './pages/About';
-import Projects from './pages/Projects';
-import Experience from './pages/Experience';
 import { motion } from 'framer-motion';
 // import { ProjectBox } from './components/ProjectBox';
 // import HomePage from './pages/HomePage';
@@ -11,25 +8,6 @@ import { motion } from 'framer-motion';
 // import ContactPage from './pages/ContactPage';
 
 function App() {
-  const [ component, setComponent ] = useState('');
-
-  const handleToggleHome = () => {
-    setComponent('')
-  }
-
-  const handleToggleAbout = () => {
-    setComponent('about')
-  }
-
-  const handleToggleProjects = () => {
-    setComponent('project')
-  }
-
-  const handleToggleExperience = () => {
-    setComponent('experience')
-  }
-  
-
   return (
     <div className="App">
       <header className="App-header">
@@ -37,25 +15,11 @@ function App() {
           Eva Liu's Space
         </p>
         <main>
-          <nav>
-            <button onClick={handleToggleHome}>
-              Home
-            </button>
-            <button onClick={handleToggleAbout}>
-              About
-            </button>
-            <button onClick={handleToggleExperience}>
-              Experience
-            </button>
-            <button onClick={handleToggleProjects}>
-              Projects
-            </button>
-          </nav>
           <div className='wrapper'>
             <div id='lofi-room'>
               <LofiRoom />
             </div>
-            {component === "about" && (
+            {(
               <motion.div
                 key="about"
                 className="about-motion-wrapper"
@@ -67,8 +31,6 @@ function App() {
                 <About />
               </motion.div>
             )}
-            {component === 'project' && (<Projects />)}
-            {component === 'experience' && (<Experience />)}
           </div>
         </main>
       </header>

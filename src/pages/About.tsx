@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/About.css'
+import Projects from './Projects';
+import Experience from './Experience';
 
 function About() {
   return (
@@ -26,6 +28,8 @@ function About() {
           Whether it’s writing full-stack code, speaking at conferences, or building fun side projects like Pet My Dog, I’m all about creating tech that’s useful and thoughtful.
         </p>
       </div>
+      <Projects />
+      <Experience />
     </div>
   );
 }
