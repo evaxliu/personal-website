@@ -1,0 +1,99 @@
+/* [project]/Documents/personal-website/src/app/styles/Projects.css [app-client] (css) */
+.Projects {
+  text-align: left;
+  color: #fff;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  flex-direction: column;
+  flex: 1 1 0;
+  justify-content: flex-start;
+  max-height: 100%;
+  padding-right: 100px;
+  display: flex;
+  overflow-y: auto;
+}
+
+.proj-motion-wrapper {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+}
+
+.Projects-header {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.Projects-main {
+  flex-direction: column;
+  gap: 16px;
+  font-size: calc(12px + .8vmin);
+  line-height: 1.8;
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .Projects {
+    text-align: center;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .Projects-header {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+
+  .Projects-main {
+    gap: 12px;
+    font-size: 1rem;
+  }
+}
+
+.proj-company {
+  margin: 0 0 6px;
+  font-size: calc(12px + 1vmin);
+}
+
+.proj-role {
+  margin: 8px 0 2px;
+}
+
+.proj-date {
+  color: #cfcfd6;
+  margin: 0 0 8px;
+}
+
+.proj-list {
+  margin: 0 0 18px;
+  padding-left: 20px;
+}
+
+.proj-list li {
+  margin: 6px 0;
+}
+
+.proj-divider {
+  background: #ffffff2e;
+  height: 1px;
+  margin: 6px 0 10px;
+}
+
+@media (max-width: 768px) {
+  .Projects-header {
+    text-align: center;
+  }
+}
+
+.Projects::-webkit-scrollbar {
+  width: 8px;
+}
+
+.Projects::-webkit-scrollbar-thumb {
+  background: #ffffff4d;
+  border-radius: 4px;
+}
+
+/*# sourceMappingURL=Documents_personal-website_src_app_styles_Projects_9fbc180e.css.map*/

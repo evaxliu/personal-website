@@ -1,1 +1,0 @@
-Dont forget to remove homepage in package.JSON when developing in local host. Creates issues with glb file.
