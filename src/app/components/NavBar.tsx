@@ -2,8 +2,6 @@
 import "../globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import icon from "../../../public/Kengdoru.png";
-import Image from "next/image";
 import React from "react";
 import { IconButton, Collapse, Navbar } from "@material-tailwind/react";
 
