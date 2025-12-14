@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/evaliu/Documents/personal-website/src/app/styles/About.css"],"sourcesContent":[".about-motion-wrapper {\n  display: flex;\n  flex: 1 1 0;\n  min-width: 0;\n  min-height: 0;\n}\n\n.About {\n  flex: 1 1 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  text-align: left;\n  color: white;\n  padding-right: 100px;\n  box-sizing: border-box;\n}\n\n.About-header {\n  font-size: 2rem;\n  font-weight: bold;\n  margin-bottom: 20px;\n}\n\n.About-main {\n  font-size: calc(12px + 0.8vmin);\n  line-height: 1.8;\n  display: flex;\n  flex-direction: column;\n  gap: 16px;\n}\n\n/* Mobile: adjust About */\n@media (max-width: 768px) {\n  .About {\n    width: 100%;\n    padding: 15px;\n    text-align: center;\n  }\n\n  .About-header {\n    font-size: 1.5rem;\n    margin-bottom: 15px;\n  }\n\n  .About-main {\n    font-size: 1rem;\n    gap: 12px;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA;;;;;;;;;;;AAWA;;;;;;AAMA;;;;;;;;AASA;EACE;;;;;;EAMA;;;;;EAKA"}}]
-}
