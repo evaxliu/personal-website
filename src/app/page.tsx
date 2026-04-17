@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import LofiRoom from "@/app/components/LofiRoom";
 import AboutContent from "@/app/components/sections/AboutContent";
 import ExperienceContent from "@/app/components/sections/ExperienceContent";
@@ -18,11 +19,21 @@ export default function Home() {
         <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
       </div>
 
-    <div className="h-full overflow-y-auto flex items-start justify-center px-8 py-12">        
-      <div className="w-full">
-          {section === "about" && <AboutContent />}
-          {section === "experience" && <ExperienceContent />}
-          {section === "projects" && <ProjectsContent />}
+      <div className="hide-scrollbar h-full overflow-y-auto flex items-start justify-center px-8 py-12">
+        <div className="w-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={section}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              {section === "about" && <AboutContent />}
+              {section === "experience" && <ExperienceContent />}
+              {section === "projects" && <ProjectsContent />}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </div>
