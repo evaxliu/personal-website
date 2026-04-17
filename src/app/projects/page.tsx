@@ -1,6 +1,6 @@
 export default function Projects() {
   return (
-    <div className="min-h-full overflow-y-auto px-6 md:px-12 py-14">
+    <div className="h-full min-h-0 overflow-y-auto px-6 md:px-12 py-14">
       <div className="max-w-3xl mx-auto space-y-10">
 
         <h1 className="text-3xl font-semibold">
@@ -9,7 +9,6 @@ export default function Projects() {
 
         <div className="space-y-6">
 
-          {/* CARD */}
           {[
             {
               title: "Personal Website",

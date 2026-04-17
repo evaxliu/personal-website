@@ -1,6 +1,6 @@
 export default function Experience() {
   return (
-    <div className="min-h-full overflow-y-auto px-6 md:px-12 py-14">
+    <div className="h-full min-h-0 overflow-y-auto px-6 md:px-12 py-14">
       <div className="max-w-3xl mx-auto space-y-10">
 
         <h1 className="text-3xl font-semibold">
@@ -9,7 +9,6 @@ export default function Experience() {
 
         <div className="space-y-8">
 
-          {/* CARD 1 */}
           <div className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
             <p className="font-semibold">
               Center for Reproducible Biomedical Modeling – Seattle, WA
@@ -34,9 +33,9 @@ export default function Experience() {
             </ul>
           </div>
 
-          {/* CARD 2 */}
           <div className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
             <p className="text-purple-200 font-medium">Software Engineer</p>
+
             <p className="text-sm text-white/60">
               July 2022 – September 2023
             </p>
