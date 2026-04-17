@@ -1,21 +1,21 @@
 "use client";
-import "../globals.css";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { IconButton, Collapse, Navbar } from "@material-tailwind/react";
+import { IconButton, Collapse } from "@material-tailwind/react";
 
 export default function NavBar() {
+  const pathname = usePathname();
+  const [openNav, setOpenNav] = React.useState(false);
+
   const navItems = [
+    { label: "About", href: "/about" },
     { label: "Experience", href: "/experience" },
     { label: "Projects", href: "/projects" },
-    { label: "About", href: "/about" },
   ];
 
-  const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
-
-  const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -26,36 +26,43 @@ export default function NavBar() {
   }, []);
 
   return (
-    <Navbar className="bg-transparent border-transparent sticky top-0 z-50 backdrop-blur-md border-b mx-auto max-w-7xl px-4 py-2 lg:px-8 lg:py-4">
-      <main className="container mx-auto flex items-center justify-between text-blue-gray-900">
-        {/* Logo */}
-        <header className="flex items-center py-1.5">
-          <Link className="flex-none" href="/" aria-label="Eva Liu">
-            <span className="inline-flex items-center gap-x-2 text-xl font-semibold">
-              {/* <Image className="w-10" src={icon} alt="Logo" /> */}
-              Eva Liu
-            </span>
-          </Link>
-        </header>
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-black/10 border-b border-white/10">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+
+        {/* 🌸 Logo */}
+        <Link href="/" className="text-lg font-semibold tracking-wide group">
+          <span className="text-white group-hover:text-purple-300 transition">
+            Eva Liu
+          </span>
+        </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex flex-row gap-6 items-center">
+        <nav className="hidden md:flex items-center gap-8 text-sm">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className={isActive(item.href) ? "text-purple-500" : ""}
+              className={[
+                "transition relative",
+                isActive(item.href)
+                  ? "text-purple-300"
+                  : "text-white/70 hover:text-purple-200",
+              ].join(" ")}
             >
               {item.label}
+
+              {/* active underline */}
+              {isActive(item.href) && (
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-purple-300 rounded-full" />
+              )}
             </Link>
           ))}
-
         </nav>
 
-        {/* Mobile Toggle */}
+        {/* Mobile button */}
         <IconButton
           variant="text"
-          className="md:hidden"
+          className="md:hidden text-white"
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >
@@ -68,7 +75,11 @@ export default function NavBar() {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
             <svg
@@ -78,27 +89,36 @@ export default function NavBar() {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </IconButton>
-      </main>
+      </div>
 
       {/* Mobile Nav */}
       <Collapse open={openNav} className="md:hidden">
-        <nav className="flex flex-col gap-5 mt-4 px-4 overflow-hidden">
+        <nav className="flex flex-col gap-4 px-6 pb-5 text-sm">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className={isActive(item.href) ? "text-purple-500" : ""}
-              onClick={() => setOpenNav(false)} // close menu when clicked
+              onClick={() => setOpenNav(false)}
+              className={[
+                "py-2 transition",
+                isActive(item.href)
+                  ? "text-purple-300"
+                  : "text-white/70 hover:text-purple-200",
+              ].join(" ")}
             >
               {item.label}
             </Link>
           ))}
         </nav>
       </Collapse>
-    </Navbar>
+    </header>
   );
 }

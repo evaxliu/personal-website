@@ -1,56 +1,76 @@
-import React from 'react';
-import '../styles/Projects.css';
-
-function Projects() {
+export default function Projects() {
   return (
-    <div className="Projects">
-      <header className="Projects-header">
-        <p>Projects</p>
-      </header>
+    <div className="min-h-full overflow-y-auto px-6 md:px-12 py-14">
+      <div className="max-w-3xl mx-auto space-y-10">
 
-      <div className="Projects-main">
-        {/* Personal Website */}
-        <p className="proj-company"><strong>Personal Website</strong> <span className="proj-date">July 2025 – Present</span></p>
-        <p><a href="https://github.com/evaxliu/personal-website" target="_blank" rel="noopener noreferrer">github.com/evaxliu/personal-website</a></p>
-        <ul className="proj-list">
-          <li>Developing a personal website leveraging React and Three.js to render a custom 3D Blender model.</li>
-        </ul>
+        <h1 className="text-3xl font-semibold">
+          <span className="text-purple-300">Projects</span>
+        </h1>
 
-        <div className="proj-divider" />
+        <div className="space-y-6">
 
-        {/* Antimony Web Editor */}
-        <p className="proj-company"><strong>Antimony Web Editor</strong> <span className="proj-date">July 2023 – September 2024</span></p>
-        <p><a href="https://github.com/sys-bio/AntimonyEditor" target="_blank" rel="noopener noreferrer">github.com/sys-bio/AntimonyEditor</a></p>
-        <ul className="proj-list">
-          <li>Developed web-based language support for the Antimony modeling language to revolutionize Systems Biology model building using React + TypeScript integrating the Monaco Editor package.</li>
-          <li>Launched beta with key features like syntax coloring and hover info for accurate model creation.</li>
-        </ul>
+          {/* CARD */}
+          {[
+            {
+              title: "Personal Website",
+              link: "github.com/evaxliu/personal-website",
+              date: "July 2025 – Present",
+              items: [
+                "Developing a personal website leveraging React and Three.js to render a custom 3D Blender model."
+              ],
+            },
+            {
+              title: "Antimony Web Editor",
+              link: "github.com/sys-bio/AntimonyEditor",
+              date: "July 2023 – September 2024",
+              items: [
+                "Developed web-based language support for the Antimony modeling language using React + TypeScript and Monaco Editor.",
+                "Launched beta with syntax highlighting and hover info features."
+              ],
+            },
+            {
+              title: "Vscode-Antimony Extension",
+              link: "github.com/sys-bio/vscode-antimony",
+              date: "July 2022 – August 2023",
+              items: [
+                "Developed VSCode extension supporting Antimony language.",
+                "Built automated installation workflow using Python and TypeScript.",
+                "Improved model readability with visual indicators and tooling."
+              ],
+            },
+            {
+              title: "Pet My Dog",
+              link: "github.com/evaliu2002/PetMyDog",
+              date: "March 2022 – June 2022",
+              items: [
+                "Built React app for real-time location sharing for dog owners.",
+                "Implemented backend data storage and user interaction features."
+              ],
+            },
+          ].map((p, i) => (
+            <div
+              key={i}
+              className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            >
+              <div className="flex justify-between items-baseline">
+                <p className="font-semibold">{p.title}</p>
+                <span className="text-xs text-white/60">{p.date}</span>
+              </div>
 
-        <div className="proj-divider" />
+              <a className="text-sm text-purple-300" href={`https://${p.link}`}>
+                {p.link}
+              </a>
 
-        {/* Vscode-Antimony Extension */}
-        <p className="proj-company"><strong>Vscode-Antimony Extension</strong> <span className="proj-date">July 2022 – August 2023</span></p>
-        <p><a href="https://github.com/sys-bio/vscode-antimony" target="_blank" rel="noopener noreferrer">github.com/sys-bio/vscode-antimony</a></p>
-        <ul className="proj-list">
-          <li>Developed features for a VSCode extension enabling Antimony language support to streamline Systems Biology model creation.</li>
-          <li>Built an automated installation workflow using Python and TypeScript, streamlining setup for users.</li>
-          <li>Added visual indicators for annotated variables to improve model readability.</li>
-          <li>Enabled dynamic Rate Law display and insertion via VSCode APIs, reducing manual modeling effort.</li>
-        </ul>
+              <ul className="list-disc pl-5 mt-3 space-y-2 text-white/80">
+                {p.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-        <div className="proj-divider" />
-
-        {/* Pet My Dog */}
-        <p className="proj-company"><strong>Pet My Dog</strong> <span className="proj-date">March 2022 – June 2022</span></p>
-        <p><a href="https://github.com/evaliu2002/PetMyDog" target="_blank" rel="noopener noreferrer">github.com/evaliu2002/PetMyDog</a></p>
-        <ul className="proj-list">
-          <li>Designed and developed a multi-page React web application enabling dog owners to broadcast their real-time location and connect with nearby users for in-person dog petting opportunities.</li>
-          <li>Collaborated with a team to implement real-time location tracking, intuitive user interfaces and interaction features, and managed design iterations based on feedback to enhance overall user experience.</li>
-          <li>Developed robust features to retrieve user input, validate and process data, and store user information in a backend database.</li>
-        </ul>
+        </div>
       </div>
     </div>
   );
 }
-
-export default Projects;

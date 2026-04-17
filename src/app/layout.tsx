@@ -4,12 +4,9 @@ import NavBar from "./components/NavBar";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-svh overflow-hidden flex flex-col">
+      <body className="min-h-screen flex flex-col bg-gradient-to-b from-[#0b0b10] via-[#111827] to-[#0b0b10] text-white">
         <NavBar />
-        {/* THIS wrapper gives pages the remaining height under the navbar */}
-        <div className="flex-1 min-h-0 overflow-hidden">
-          {children}
-        </div>
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );

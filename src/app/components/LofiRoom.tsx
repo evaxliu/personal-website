@@ -40,8 +40,8 @@ export default function LofiRoom() {
         <Suspense fallback={<Loader />}>
           <directionalLight
             position={[8, 12, -6]}
-            intensity={1.3}
-            color="#ffd8a6"
+            intensity={1.2}
+            color="#c4a1ff"
             castShadow
             shadow-mapSize-width={4096}
             shadow-mapSize-height={4096}
@@ -62,7 +62,7 @@ export default function LofiRoom() {
             color="#a5c8ff"
           />
 
-          <ambientLight intensity={0.35} color="#fff3e0" />
+          <ambientLight intensity={0.5} color="#f3e8ff" />
 
           <RoomModel url={modelUrl} />
 
