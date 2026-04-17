@@ -1,13 +1,30 @@
-import LofiRoom  from '@/app/components/LofiRoom';
+"use client";
+
+import { useState } from "react";
+import LofiRoom from "@/app/components/LofiRoom";
+import AboutContent from "@/app/components/sections/AboutContent";
+import ExperienceContent from "@/app/components/sections/ExperienceContent";
+import ProjectsContent from "@/app/components/sections/ProjectsContent";
+
+type Section = "about" | "experience" | "projects";
 
 export default function Home() {
+  const [section, setSection] = useState<Section>("about");
+
   return (
-    <main className="h-svh overflow-hidden">
-      <div className="h-[calc(100svh-64px)] grid place-items-center">
-        <div className="w-[min(1100px,92vw)] h-[min(700px,92svh)] overflow-hidden rounded-2xl">
-          <LofiRoom />
+    <div className="h-full grid grid-cols-1 lg:grid-cols-2">
+      <div className="relative h-[45vh] lg:h-full lg:sticky lg:top-0">
+        <LofiRoom activeSection={section} onSelectSection={setSection} />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+      </div>
+
+    <div className="h-full overflow-y-auto flex items-start justify-center px-8 py-12">        
+      <div className="w-full">
+          {section === "about" && <AboutContent />}
+          {section === "experience" && <ExperienceContent />}
+          {section === "projects" && <ProjectsContent />}
         </div>
       </div>
-    </main>
+    </div>
   );
 }

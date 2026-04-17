@@ -1,14 +1,11 @@
 import "./globals.css";
-import NavBar from "./components/NavBar";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-svh overflow-hidden flex flex-col">
-        <NavBar />
-        {/* THIS wrapper gives pages the remaining height under the navbar */}
-        <div className="flex-1 min-h-0 overflow-hidden">
-          {children}
+      <body className="bg-[#0b0b10] text-white h-screen overflow-hidden">
+        <div className="h-full flex flex-col">
+          <main className="flex-1 min-h-0">{children}</main>
         </div>
       </body>
     </html>
