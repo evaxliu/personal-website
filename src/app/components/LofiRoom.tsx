@@ -1,91 +1,64 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
-import {
-  Html,
-  OrbitControls,
-  OrthographicCamera,
-  useGLTF,
-  useProgress,
-} from "@react-three/drei";
-import * as THREE from "three";
+import Image from "next/image";
 
-function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{progress.toFixed(0)}% loaded</Html>;
-}
+type Section = "about" | "experience" | "projects";
 
-function RoomModel({ url }: { url: string }) {
-  const gltf = useGLTF(url);
-
-  useMemo(() => {
-    gltf.scene.traverse((obj: THREE.Object3D) => {
-      if (obj instanceof THREE.Mesh || obj instanceof THREE.SkinnedMesh) {
-        obj.castShadow = true;
-        obj.receiveShadow = true;
-      }
-    });
-  }, [gltf.scene]);
-
-  return <primitive object={gltf.scene} position={[0, -1, 0]} />;
-}
-
-export default function LofiRoom() {
-  const modelUrl = "/assets/cozy.glb";
-
+export default function LofiRoom({
+  activeSection,
+  onSelectSection,
+}: {
+  activeSection: Section;
+  onSelectSection: (section: Section) => void;
+}) {
   return (
-    <div className="w-full h-full">
-      <Canvas className="w-full h-full block" shadows>
-        <Suspense fallback={<Loader />}>
-          <directionalLight
-            position={[8, 12, -6]}
-            intensity={1.2}
-            color="#c4a1ff"
-            castShadow
-            shadow-mapSize-width={4096}
-            shadow-mapSize-height={4096}
-            shadow-bias={-0.0001}
-          />
+    <div className="relative w-full h-full min-h-full overflow-hidden">
+      <Image
+        src="/assets/purpleisoroom.jpg"
+        alt="room"
+        fill
+        priority
+        sizes="50vw"
+        className="object-cover object-center"
+      />
 
-          <hemisphereLight args={["#ffeedd", "#999999", 0.6]} />
+      <div className="absolute inset-0 bg-black/10" />
 
-          <directionalLight
-            position={[-6, 4, -2]}
-            intensity={0.6}
-            color="#ff9bb2"
-          />
+      <button
+        onClick={() => onSelectSection("projects")}
+        className={[
+          "absolute left-[21%] top-[50%] z-10 -translate-x-1/2 px-4 py-2 rounded-full border transition hover:scale-105",
+          activeSection === "projects"
+            ? "bg-purple-400/35 border-purple-200/50"
+            : "bg-purple-400/20 border-purple-300/30 hover:bg-purple-300/30",
+        ].join(" ")}
+      >
+        💻 Projects
+      </button>
 
-          <directionalLight
-            position={[0, 3, -8]}
-            intensity={0.3}
-            color="#a5c8ff"
-          />
+      <button
+        onClick={() => onSelectSection("experience")}
+        className={[
+          "absolute left-[80%] top-[43%] z-10 -translate-x-1/2 px-4 py-2 rounded-full border transition hover:scale-105",
+          activeSection === "experience"
+            ? "bg-blue-400/35 border-blue-200/50"
+            : "bg-blue-400/20 border-blue-300/30 hover:bg-blue-300/30",
+        ].join(" ")}
+      >
+        🧠 Experience
+      </button>
 
-          <ambientLight intensity={0.5} color="#f3e8ff" />
-
-          <RoomModel url={modelUrl} />
-
-          <OrbitControls
-            target={[0, 0, 0]}
-            enableZoom={false}
-            minPolarAngle={Math.PI / 3}
-            maxPolarAngle={Math.PI / 2}
-            minAzimuthAngle={-Math.PI / 10}
-            maxAzimuthAngle={Math.PI / 2}
-          />
-
-          <OrthographicCamera
-            makeDefault
-            position={[12, 5, 12]}
-            zoom={90}
-            near={0.1}
-            far={1000}
-          />
-        </Suspense>
-      </Canvas>
+      <button
+        onClick={() => onSelectSection("about")}
+        className={[
+          "absolute left-[50%] top-[60%] z-10 -translate-x-1/2 px-4 py-2 rounded-full border transition hover:scale-105",
+          activeSection === "about"
+            ? "bg-white/20 border-white/40"
+            : "bg-white/10 border-white/20 hover:bg-white/20",
+        ].join(" ")}
+      >
+        👋 About
+      </button>
     </div>
   );
 }
-
-useGLTF.preload("/assets/cozy.glb");

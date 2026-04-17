@@ -1,39 +1,28 @@
+"use client";
+
+import { useState } from "react";
 import LofiRoom from "@/app/components/LofiRoom";
-import Link from "next/link";
+import AboutContent from "@/app/components/sections/AboutContent";
+import ExperienceContent from "@/app/components/sections/ExperienceContent";
+import ProjectsContent from "@/app/components/sections/ProjectsContent";
+
+type Section = "about" | "experience" | "projects";
 
 export default function Home() {
+  const [section, setSection] = useState<Section>("about");
+
   return (
-    <div className="h-full grid grid-cols-1 md:grid-cols-2">
-      <div className="relative h-full">
-        <LofiRoom />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+    <div className="h-full grid grid-cols-1 lg:grid-cols-2">
+      <div className="relative h-[45vh] lg:h-full lg:sticky lg:top-0">
+        <LofiRoom activeSection={section} onSelectSection={setSection} />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
       </div>
 
-      <div className="h-full flex items-center justify-center px-10">
-        <div className="max-w-md space-y-6">
-          <h1 className="text-4xl font-semibold tracking-tight">
-            Hi, I’m <span className="text-purple-300">Eva</span>
-          </h1>
-
-          <p className="text-white/70 leading-relaxed">
-            I build thoughtful software at the intersection of systems, biology, and design.
-          </p>
-
-          <div className="flex gap-4 pt-4">
-            <Link
-              href="/projects"
-              className="px-5 py-2 rounded-full bg-purple-400/20 border border-purple-300/30 hover:bg-purple-300/30 transition"
-            >
-              Projects
-            </Link>
-
-            <Link
-              href="/about"
-              className="px-5 py-2 rounded-full border border-white/10 hover:border-white/30 transition"
-            >
-              About
-            </Link>
-          </div>
+    <div className="h-full overflow-y-auto flex items-start justify-center px-8 py-12">        
+      <div className="w-full">
+          {section === "about" && <AboutContent />}
+          {section === "experience" && <ExperienceContent />}
+          {section === "projects" && <ProjectsContent />}
         </div>
       </div>
     </div>
