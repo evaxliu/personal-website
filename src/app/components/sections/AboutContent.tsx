@@ -22,7 +22,7 @@ export default function AboutContent() {
           </p>
 
           <p>
-            Lately, I’ve been spending time improving my problem-solving skills (a lot of leetcode), getting into machine learning through a stock analysis project, and building a small blog platform. I like working on things that help me think better or stay consistent, so a lot of what I build ends up reflecting that. I’m also in the process of applying to grad school.
+            Lately, I’ve been spending time improving my problem-solving skills (a lot of leetcode), getting into machine learning through a stock analysis project, and building a small blog platform. I like working on things where I’m able to develop my skills. I’m also in the process of applying to grad school.
           </p>
         </div>
       </div>
