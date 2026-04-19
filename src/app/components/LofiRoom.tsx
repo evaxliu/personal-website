@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
-type Section = "about" | "experience" | "projects";
+import type { Section } from "@/app/page";
 
 export default function LofiRoom({
   activeSection,
@@ -25,12 +24,24 @@ export default function LofiRoom({
       <div className="absolute inset-0 bg-black/10" />
 
       <button
+        onClick={() => onSelectSection("home")}
+        className={[
+          "absolute left-[50%] top-[60%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
+          activeSection === "home"
+            ? "border-indigo-100/90 bg-indigo-200/50 ring-2 ring-indigo-100/55"
+            : "border-indigo-100/45 bg-indigo-300/22 hover:border-indigo-100/75 hover:bg-indigo-200/34",
+        ].join(" ")}
+      >
+        🏠 Home
+      </button>
+
+      <button
         onClick={() => onSelectSection("projects")}
         className={[
-          "absolute left-[21%] top-[50%] z-10 -translate-x-1/2 px-4 py-2 rounded-full border transition hover:scale-105",
+          "absolute left-[21%] top-[50%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
           activeSection === "projects"
-            ? "bg-purple-400/35 border-purple-200/50"
-            : "bg-purple-400/20 border-purple-300/30 hover:bg-purple-300/30",
+            ? "border-fuchsia-100/90 bg-fuchsia-200/46 ring-2 ring-fuchsia-100/55"
+            : "border-fuchsia-100/45 bg-fuchsia-300/20 hover:border-fuchsia-100/75 hover:bg-fuchsia-200/32",
         ].join(" ")}
       >
         💻 Projects
@@ -39,10 +50,10 @@ export default function LofiRoom({
       <button
         onClick={() => onSelectSection("experience")}
         className={[
-          "absolute left-[80%] top-[43%] z-10 -translate-x-1/2 px-4 py-2 rounded-full border transition hover:scale-105",
+          "absolute left-[80%] top-[43%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
           activeSection === "experience"
-            ? "bg-blue-400/35 border-blue-200/50"
-            : "bg-blue-400/20 border-blue-300/30 hover:bg-blue-300/30",
+            ? "border-sky-100/90 bg-sky-200/50 ring-2 ring-sky-100/55"
+            : "border-sky-100/45 bg-sky-300/22 hover:border-sky-100/75 hover:bg-sky-200/34",
         ].join(" ")}
       >
         🧠 Experience
@@ -51,13 +62,13 @@ export default function LofiRoom({
       <button
         onClick={() => onSelectSection("about")}
         className={[
-          "absolute left-[50%] top-[60%] z-10 -translate-x-1/2 px-4 py-2 rounded-full border transition hover:scale-105",
+          "absolute left-[68%] top-[72%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
           activeSection === "about"
-            ? "bg-white/20 border-white/40"
-            : "bg-white/10 border-white/20 hover:bg-white/20",
+            ? "border-pink-100/90 bg-pink-200/42 ring-2 ring-pink-100/55"
+            : "border-pink-100/45 bg-pink-300/18 hover:border-pink-100/75 hover:bg-pink-200/30",
         ].join(" ")}
       >
-        👋 About
+        🌸 About
       </button>
     </div>
   );

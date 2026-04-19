@@ -3,14 +3,15 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import LofiRoom from "@/app/components/LofiRoom";
+import HomeContent from "@/app/components/sections/HomeContent";
 import AboutContent from "@/app/components/sections/AboutContent";
 import ExperienceContent from "@/app/components/sections/ExperienceContent";
 import ProjectsContent from "@/app/components/sections/ProjectsContent";
 
-type Section = "about" | "experience" | "projects";
+export type Section = "home" | "about" | "experience" | "projects";
 
 export default function Home() {
-  const [section, setSection] = useState<Section>("about");
+  const [section, setSection] = useState<Section>("home");
 
   return (
     <div className="h-full grid grid-cols-1 lg:grid-cols-2">
@@ -29,6 +30,7 @@ export default function Home() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
             >
+              {section === "home" && <HomeContent />}
               {section === "about" && <AboutContent />}
               {section === "experience" && <ExperienceContent />}
               {section === "projects" && <ProjectsContent />}
