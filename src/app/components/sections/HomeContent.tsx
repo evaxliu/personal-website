@@ -3,56 +3,22 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import SectionShell from "./SectionShell";
+import ContentCard from "@/app/components/ui/ContentCard";
+import type { LeetCodeData } from "./home/home.types";
+import {
+  buildRecentHeatmap,
+  getHeatColor,
+  isLeetCodeData,
+  mergeTopTags,
+} from "./home/home.utils";
+import {
+  PanelCard,
+  StatCard,
+  SubmissionItem,
+  TagChip,
+} from "./home/components";
 
-type RecentSubmission = {
-  title: string;
-  titleSlug: string;
-  timestamp: string;
-  statusDisplay: string;
-  lang: string;
-};
-
-type TagItem = {
-  tagName: string;
-  tagSlug: string;
-  problemsSolved: number;
-};
-
-type LeetCodeData = {
-  username: string;
-  profile: {
-    realName: string;
-    userAvatar: string;
-    ranking: number;
-    reputation: number;
-    starRating: number;
-  };
-  stats: {
-    totalSolved: number;
-    easySolved: number;
-    mediumSolved: number;
-    hardSolved: number;
-  };
-  streak: number;
-  totalActiveDays: number;
-  calendar: Record<string, number>;
-  recentSubmissions: RecentSubmission[];
-  languages: Array<{
-    languageName: string;
-    problemsSolved: number;
-  }>;
-  tagProblemCounts: {
-    advanced: TagItem[];
-    intermediate: TagItem[];
-    fundamental: TagItem[];
-  };
-  badges: Array<{
-    id: string;
-    displayName: string;
-    icon: string;
-    creationDate: string;
-  }>;
-};
+const LEETCODE_USERNAME = "LilacPlanet";
 
 const container = {
   hidden: {},
@@ -72,75 +38,6 @@ const item = {
   },
 };
 
-const LEETCODE_USERNAME = "LilacPlanet";
-
-function formatDate(timestamp: string) {
-  const date = new Date(Number(timestamp) * 1000);
-  return date.toLocaleDateString(undefined, {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
-function getHeatColor(value: number) {
-  if (value === 0) return "bg-white/10";
-  if (value <= 1) return "bg-purple-400/30";
-  if (value <= 2) return "bg-purple-400/45";
-  if (value <= 4) return "bg-purple-400/65";
-  return "bg-purple-300/90";
-}
-
-function buildRecentHeatmap(calendar: Record<string, number>, days = 35) {
-  const today = new Date();
-  const countsByDate = new Map<string, number>();
-
-  for (const [timestamp, count] of Object.entries(calendar)) {
-    const date = new Date(Number(timestamp) * 1000);
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(
-      date.getDate()
-    ).padStart(2, "0")}`;
-
-    countsByDate.set(key, count);
-  }
-
-  const cells: { date: string; count: number }[] = [];
-
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-
-    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
-      d.getDate()
-    ).padStart(2, "0")}`;
-
-    cells.push({
-      date: key,
-      count: countsByDate.get(key) ?? 0,
-    });
-  }
-
-  return cells;
-}
-
-function mergeTopTags(data: LeetCodeData["tagProblemCounts"]) {
-  return [...data.fundamental, ...data.intermediate, ...data.advanced]
-    .sort((a, b) => b.problemsSolved - a.problemsSolved)
-    .slice(0, 6);
-}
-
-function isLeetCodeData(value: unknown): value is LeetCodeData {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "username" in value &&
-    "stats" in value &&
-    "calendar" in value &&
-    "recentSubmissions" in value &&
-    "tagProblemCounts" in value
-  );
-}
-
 export default function HomeContent() {
   const [data, setData] = useState<LeetCodeData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -157,7 +54,6 @@ export default function HomeContent() {
         const res = await fetch(
           `/api/leetcode?username=${encodeURIComponent(LEETCODE_USERNAME)}`
         );
-
         const text = await res.text();
 
         if (!text) {
@@ -174,7 +70,7 @@ export default function HomeContent() {
         }
 
         if (!res.ok) {
-          const errorMessage =
+          const message =
             typeof json === "object" &&
             json !== null &&
             "error" in json &&
@@ -182,7 +78,7 @@ export default function HomeContent() {
               ? json.error
               : "Failed to fetch LeetCode data";
 
-          throw new Error(errorMessage);
+          throw new Error(message);
         }
 
         if (!isLeetCodeData(json)) {
@@ -211,129 +107,117 @@ export default function HomeContent() {
   }, []);
 
   const heatmap = useMemo(() => {
-    if (!data) return [];
-    return buildRecentHeatmap(data.calendar, 35);
+    return data ? buildRecentHeatmap(data.calendar, 35) : [];
   }, [data]);
 
   const topTags = useMemo(() => {
-    if (!data) return [];
-    return mergeTopTags(data.tagProblemCounts);
+    return data ? mergeTopTags(data.tagProblemCounts) : [];
   }, [data]);
 
   const uniqueRecentSubmissions = useMemo(() => {
     if (!data) return [];
 
-    const seen = new Set<string>();
+    const grouped = new Map<string, typeof data.recentSubmissions>();
 
-    return data.recentSubmissions.filter((submission) => {
-      if (seen.has(submission.titleSlug)) {
-        return false;
-      }
+    for (const submission of data.recentSubmissions) {
+      const existing = grouped.get(submission.titleSlug) ?? [];
+      existing.push(submission);
+      grouped.set(submission.titleSlug, existing);
+    }
 
-      seen.add(submission.titleSlug);
-      return true;
-    });
+    return Array.from(grouped.values())
+      .map((submissions) => {
+        const sorted = [...submissions].sort(
+          (a, b) => Number(b.timestamp) - Number(a.timestamp)
+        );
+
+        const accepted = sorted.find((submission) =>
+          submission.statusDisplay.toLowerCase().includes("accepted")
+        );
+
+        return accepted ?? sorted[0];
+      })
+      .sort((a, b) => Number(b.timestamp) - Number(a.timestamp));
   }, [data]);
 
   return (
-    <SectionShell title="Home">
+    <SectionShell
+      eyebrow="Welcome"
+      title={
+        <>
+          Eva <span className="text-purple-300">Liu</span>
+        </>
+      }
+      description="I enjoy building things end-to-end and learning by doing. Recently, I’ve been spending time strengthening my problem-solving skills through LeetCode while continuing to build projects across the stack."
+    >
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="space-y-5"
       >
-        <motion.div variants={item} className="space-y-3 pt-1">
-          <p className="text-[20px] uppercase tracking-[0.22em] text-purple-300">
-            Eva Liu
-          </p>
-          <p className="max-w-2xl text-sm md:text-base text-white/70 leading-relaxed">
-            I enjoy building things end-to-end and learning by doing. Recently,
-            I’ve been spending time strengthening my problem-solving
-            skills through LeetCode while continuing to build projects across
-            the stack.
-          </p>
-        </motion.div>
-
         {loading && (
-          <motion.div
-            variants={item}
-            className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70"
-          >
-            Loading live LeetCode data...
+          <motion.div variants={item}>
+            <ContentCard className="p-4 text-sm text-white/70" hover={false}>
+              Loading live LeetCode data...
+            </ContentCard>
           </motion.div>
         )}
 
         {error && (
-          <motion.div
-            variants={item}
-            className="rounded-2xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-100"
-          >
-            {error}
+          <motion.div variants={item}>
+            <ContentCard
+              className="border-red-400/20 bg-red-400/10 p-4 text-sm text-red-100"
+              hover={false}
+            >
+              {error}
+            </ContentCard>
           </motion.div>
         )}
 
         {data && (
           <motion.div variants={item} className="space-y-4">
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <div>
-                <h2 className="text-xl md:text-2xl font-semibold">
-                  Live <span className="text-purple-300">LeetCode</span> activity
-                </h2>
-              </div>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <h2 className="text-xl md:text-2xl font-semibold">
+                Live <span className="text-purple-300">LeetCode</span> activity
+              </h2>
 
               <a
                 href={`https://leetcode.com/${LEETCODE_USERNAME}/`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm text-purple-300 hover:text-purple-200 transition"
+                className="text-sm text-purple-300 transition hover:text-purple-200"
               >
                 View profile ↗
               </a>
             </div>
 
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs text-white/55">Solved</p>
-                <p className="mt-2 text-2xl font-semibold text-purple-300">
-                  {data.stats.totalSolved}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs text-white/55">Streak</p>
-                <p className="mt-2 text-2xl font-semibold text-amber-300">
-                  {data.streak}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs text-white/55">Ranking</p>
-                <p className="mt-2 text-2xl font-semibold text-sky-300">
-                  #{data.profile?.ranking?.toLocaleString?.() ?? "—"}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs text-white/55">Active Days</p>
-                <p className="mt-2 text-2xl font-semibold text-emerald-300">
-                  {data.totalActiveDays}
-                </p>
-              </div>
+            <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+              <StatCard
+                label="Solved"
+                value={data.stats.totalSolved}
+                valueClassName="text-purple-300"
+              />
+              <StatCard
+                label="Streak"
+                value={data.streak}
+                valueClassName="text-amber-300"
+              />
+              <StatCard
+                label="Ranking"
+                value={`#${data.profile?.ranking?.toLocaleString?.() ?? "—"}`}
+                valueClassName="text-sky-300"
+              />
+              <StatCard
+                label="Active Days"
+                value={data.totalActiveDays}
+                valueClassName="text-emerald-300"
+              />
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="flex items-center justify-between gap-4 flex-wrap">
-                  <div>
-                    <h3 className="text-base font-semibold">Activity</h3>
-                    <p className="mt-0.5 text-[11px] text-white/55">
-                      Last 35 days
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-3 grid grid-cols-7 gap-1 max-w-65">
+            <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1.1fr_0.9fr]">
+              <PanelCard title="Activity" subtitle="Last 35 days">
+                <div className="grid max-w-65 grid-cols-7 gap-1">
                   {heatmap.map((cell) => (
                     <div
                       key={cell.date}
@@ -341,7 +225,9 @@ export default function HomeContent() {
                         "aspect-square rounded-[5px] border border-white/10",
                         getHeatColor(cell.count),
                       ].join(" ")}
-                      title={`${cell.date}: ${cell.count} submission${cell.count === 1 ? "" : "s"}`}
+                      title={`${cell.date}: ${cell.count} submission${
+                        cell.count === 1 ? "" : "s"
+                      }`}
                     />
                   ))}
                 </div>
@@ -375,7 +261,8 @@ export default function HomeContent() {
                           <span className="text-white/70">{row.label}</span>
                           <span className="text-white/50">{row.value}</span>
                         </div>
-                        <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+
+                        <div className="h-1.5 overflow-hidden rounded-full bg-white/8">
                           <div
                             className={`h-full rounded-full ${row.accent}`}
                             style={{ width: `${width}%` }}
@@ -390,68 +277,33 @@ export default function HomeContent() {
                   <h3 className="text-xs font-semibold text-white/85">
                     Top tags
                   </h3>
+
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {topTags.map((tag) => (
-                      <span
-                        key={tag.tagSlug}
-                        className="rounded-full border border-white/10 bg-white/6 px-2 py-0.5 text-[11px] text-white/75"
-                      >
-                        {tag.tagName} · {tag.problemsSolved}
-                      </span>
+                      <TagChip key={tag.tagSlug} tag={tag} />
                     ))}
                   </div>
                 </div>
-              </div>
+              </PanelCard>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <h3 className="text-base font-semibold">Recent submissions</h3>
-
-                <div className="mt-3 space-y-2">
-                  {uniqueRecentSubmissions.length === 0 && (
+              <PanelCard title="Recent submissions">
+                <div className="space-y-2">
+                  {uniqueRecentSubmissions.length === 0 ? (
                     <p className="text-sm text-white/60">
                       No recent submissions available.
                     </p>
+                  ) : (
+                    uniqueRecentSubmissions
+                      .slice(0, 4)
+                      .map((submission) => (
+                        <SubmissionItem
+                          key={`${submission.titleSlug}-${submission.timestamp}`}
+                          submission={submission}
+                        />
+                      ))
                   )}
-
-                  {uniqueRecentSubmissions.slice(0, 4).map((submission) => (
-                    <div
-                      key={`${submission.titleSlug}-${submission.timestamp}`}
-                      className="rounded-lg border border-white/8 bg-black/10 p-3"
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <a
-                          href={`https://leetcode.com/problems/${submission.titleSlug}/`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[13px] font-medium text-white/90 leading-snug hover:text-purple-300 transition"
-                        >
-                          {submission.title}
-                        </a>
-
-                        <span
-                          className={[
-                            "shrink-0 rounded-full px-2 py-0.5 text-[10px] border",
-                            submission.statusDisplay.toLowerCase().includes("accepted")
-                              ? "border-emerald-300/20 bg-emerald-400/10 text-emerald-200"
-                              : "border-amber-300/20 bg-amber-400/10 text-amber-200",
-                          ].join(" ")}
-                        >
-                          {submission.statusDisplay}
-                        </span>
-                      </div>
-
-                      <div className="mt-2 flex flex-wrap gap-1.5 text-[10px] text-white/55">
-                        <span className="rounded-full bg-white/6 px-2 py-0.5">
-                          {submission.lang}
-                        </span>
-                        <span className="rounded-full bg-white/6 px-2 py-0.5">
-                          {formatDate(submission.timestamp)}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
                 </div>
-              </div>
+              </PanelCard>
             </div>
           </motion.div>
         )}

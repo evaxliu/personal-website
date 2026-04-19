@@ -2,6 +2,16 @@
 
 import Image from "next/image";
 import type { Section } from "@/app/page";
+import RoomNavButton from "@/app/components/ui/RoomNavButton";
+
+type NavButtonConfig = {
+  section: Section;
+  label: string;
+  icon: string;
+  position: string;
+  active: string;
+  idle: string;
+};
 
 export default function LofiRoom({
   activeSection,
@@ -10,6 +20,49 @@ export default function LofiRoom({
   activeSection: Section;
   onSelectSection: (section: Section) => void;
 }) {
+  const buttons: NavButtonConfig[] = [
+    {
+      section: "home",
+      label: "Home",
+      icon: "🏠",
+      position: "left-[50%] top-[60%]",
+      active:
+        "border-indigo-100/90 bg-indigo-200/50 ring-2 ring-indigo-100/55 shadow-[0_0_30px_rgba(165,180,252,0.18)]",
+      idle:
+        "border-indigo-100/45 bg-indigo-300/22 hover:border-indigo-100/75 hover:bg-indigo-200/34",
+    },
+    {
+      section: "projects",
+      label: "Projects",
+      icon: "💻",
+      position: "left-[21%] top-[50%]",
+      active:
+        "border-fuchsia-100/90 bg-fuchsia-200/46 ring-2 ring-fuchsia-100/55 shadow-[0_0_30px_rgba(232,121,249,0.16)]",
+      idle:
+        "border-fuchsia-100/45 bg-fuchsia-300/20 hover:border-fuchsia-100/75 hover:bg-fuchsia-200/32",
+    },
+    {
+      section: "experience",
+      label: "Experience",
+      icon: "🧠",
+      position: "left-[80%] top-[43%]",
+      active:
+        "border-sky-100/90 bg-sky-200/50 ring-2 ring-sky-100/55 shadow-[0_0_30px_rgba(125,211,252,0.16)]",
+      idle:
+        "border-sky-100/45 bg-sky-300/22 hover:border-sky-100/75 hover:bg-sky-200/34",
+    },
+    {
+      section: "about",
+      label: "About",
+      icon: "🌸",
+      position: "left-[68%] top-[72%]",
+      active:
+        "border-pink-100/90 bg-pink-200/42 ring-2 ring-pink-100/55 shadow-[0_0_30px_rgba(249,168,212,0.16)]",
+      idle:
+        "border-pink-100/45 bg-pink-300/18 hover:border-pink-100/75 hover:bg-pink-200/30",
+    },
+  ];
+
   return (
     <div className="relative w-full h-full min-h-full overflow-hidden">
       <Image
@@ -22,54 +75,20 @@ export default function LofiRoom({
       />
 
       <div className="absolute inset-0 bg-black/10" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(0,0,0,0.18)_100%)]" />
 
-      <button
-        onClick={() => onSelectSection("home")}
-        className={[
-          "absolute left-[50%] top-[60%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
-          activeSection === "home"
-            ? "border-indigo-100/90 bg-indigo-200/50 ring-2 ring-indigo-100/55"
-            : "border-indigo-100/45 bg-indigo-300/22 hover:border-indigo-100/75 hover:bg-indigo-200/34",
-        ].join(" ")}
-      >
-        🏠 Home
-      </button>
-
-      <button
-        onClick={() => onSelectSection("projects")}
-        className={[
-          "absolute left-[21%] top-[50%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
-          activeSection === "projects"
-            ? "border-fuchsia-100/90 bg-fuchsia-200/46 ring-2 ring-fuchsia-100/55"
-            : "border-fuchsia-100/45 bg-fuchsia-300/20 hover:border-fuchsia-100/75 hover:bg-fuchsia-200/32",
-        ].join(" ")}
-      >
-        💻 Projects
-      </button>
-
-      <button
-        onClick={() => onSelectSection("experience")}
-        className={[
-          "absolute left-[80%] top-[43%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
-          activeSection === "experience"
-            ? "border-sky-100/90 bg-sky-200/50 ring-2 ring-sky-100/55"
-            : "border-sky-100/45 bg-sky-300/22 hover:border-sky-100/75 hover:bg-sky-200/34",
-        ].join(" ")}
-      >
-        🧠 Experience
-      </button>
-
-      <button
-        onClick={() => onSelectSection("about")}
-        className={[
-          "absolute left-[68%] top-[72%] z-10 -translate-x-1/2 rounded-full border px-4 py-2 font-normal text-white backdrop-blur-sm transition duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/40",
-          activeSection === "about"
-            ? "border-pink-100/90 bg-pink-200/42 ring-2 ring-pink-100/55"
-            : "border-pink-100/45 bg-pink-300/18 hover:border-pink-100/75 hover:bg-pink-200/30",
-        ].join(" ")}
-      >
-        🌸 About
-      </button>
+      {buttons.map((button) => (
+        <RoomNavButton
+          key={button.section}
+          label={button.label}
+          icon={button.icon}
+          position={button.position}
+          active={activeSection === button.section}
+          onClick={() => onSelectSection(button.section)}
+          activeClassName={button.active}
+          idleClassName={button.idle}
+        />
+      ))}
     </div>
   );
 }

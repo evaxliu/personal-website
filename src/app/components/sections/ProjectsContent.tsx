@@ -1,4 +1,5 @@
 import SectionShell from "./SectionShell";
+import ContentCard from "@/app/components/ui/ContentCard";
 
 export default function ProjectsContent() {
   const projects = [
@@ -55,21 +56,18 @@ export default function ProjectsContent() {
   ];
 
   return (
-    <SectionShell title="Projects">
-      <h1 className="text-3xl font-semibold">
-        <span className="text-purple-300">Projects</span>
-      </h1>
-
+    <SectionShell
+      eyebrow="Featured work"
+      title={<span className="text-purple-300">Projects</span>}
+      description="A few projects that reflect the kinds of tools and interfaces I enjoy building."
+    >
       <div className="space-y-6">
         {projects.map((p) => (
-          <div
-            key={p.title}
-            className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
-          >
-            <p className="font-semibold">{p.title}</p>
+          <ContentCard key={p.title} className="p-6">
+            <p className="font-semibold text-white/95">{p.title}</p>
 
             <a
-              className="mt-4 block text-sm text-purple-300 break-all"
+              className="mt-3 inline-block break-all text-sm text-purple-300 transition hover:text-purple-200"
               href={p.link}
               target="_blank"
               rel="noreferrer"
@@ -79,12 +77,12 @@ export default function ProjectsContent() {
 
             <p className="mt-1 text-sm text-white/60">{p.date}</p>
 
-            <ul className="list-disc pl-5 mt-4 space-y-2 text-white/80">
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-white/80 leading-relaxed">
               {p.items.map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
             </ul>
-          </div>
+          </ContentCard>
         ))}
       </div>
     </SectionShell>
