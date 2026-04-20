@@ -53,7 +53,7 @@ export default function NavBar() {
 
               {/* active underline */}
               {isActive(item.href) && (
-                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-purple-300 rounded-full" />
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-300 rounded-full" />
               )}
             </Link>
           ))}

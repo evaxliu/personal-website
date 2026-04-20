@@ -9,13 +9,11 @@ import {
   buildRecentHeatmap,
   getHeatColor,
   isLeetCodeData,
-  mergeTopTags,
 } from "./home/home.utils";
 import {
   PanelCard,
   StatCard,
   SubmissionItem,
-  TagChip,
 } from "./home/components";
 
 const LEETCODE_USERNAME = "LilacPlanet";
@@ -145,10 +143,6 @@ export default function HomeContent() {
     return data ? buildRecentHeatmap(data.calendar, ACTIVITY_DAYS) : [];
   }, [data]);
 
-  const topTags = useMemo(() => {
-    return data ? mergeTopTags(data.tagProblemCounts) : [];
-  }, [data]);
-
   const uniqueRecentSubmissions = useMemo(() => {
     if (!data) return [];
 
@@ -189,6 +183,10 @@ export default function HomeContent() {
           <br />
           Previously Lead Software Engineer @ Center for Reproducible Biomedical
           Modeling.
+          <br />
+          Currently focused on <span className="text-purple-300">grad school apps</span>,{" "}
+          studying <span className="text-purple-300">LeetCode</span>, and personal{" "}
+          <span className="text-purple-300">projects</span>.
         </>
       }
     >
@@ -236,15 +234,6 @@ export default function HomeContent() {
                   </p>
                 )}
               </div>
-
-              <a
-                href={`https://leetcode.com/${LEETCODE_USERNAME}/`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm text-purple-300 transition hover:text-purple-200"
-              >
-                View profile ↗
-              </a>
             </div>
 
             <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
@@ -279,7 +268,7 @@ export default function HomeContent() {
                       <div
                         key={value}
                         className={[
-                          "h-3.5 w-3.5 rounded-[4px] border border-white/10",
+                          "h-3.5 w-3.5 rounded-sm border border-white/10",
                           getHeatColor(value),
                         ].join(" ")}
                       />
@@ -288,13 +277,13 @@ export default function HomeContent() {
                   <span>More</span>
                 </div>
 
-                <div className="mt-4 grid max-w-[220px] grid-cols-6 gap-2 sm:max-w-[260px] sm:gap-2.5">
+                <div className="mt-4 grid max-w-55 grid-cols-6 gap-2 sm:max-w-65 sm:gap-2.5">
                   {heatmap.map((cell) => (
                     <div
                       key={cell.date}
                       className={[
-                        "aspect-square min-h-[18px] min-w-[18px] rounded-[6px] border border-white/10",
-                        "sm:min-h-[20px] sm:min-w-[20px]",
+                        "aspect-square min-h-4.5 min-w-4.5 rounded-md border border-white/10",
+                        "sm:min-h-5 sm:min-w-5",
                         getHeatColor(cell.count),
                       ].join(" ")}
                       title={`${cell.date}: ${cell.count} submission${
@@ -343,18 +332,6 @@ export default function HomeContent() {
                       </div>
                     );
                   })}
-                </div>
-
-                <div className="mt-4">
-                  <h3 className="text-xs font-semibold text-white/85">
-                    Top tags
-                  </h3>
-
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {topTags.map((tag) => (
-                      <TagChip key={tag.tagSlug} tag={tag} />
-                    ))}
-                  </div>
                 </div>
               </PanelCard>
 
