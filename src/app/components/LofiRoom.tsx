@@ -55,7 +55,7 @@ export default function LofiRoom({
       section: "about",
       label: "About",
       icon: "🌸",
-      position: "left-[68%] top-[72%]",
+      position: "left-[40%] top-[40%]",
       active:
         "border-pink-100/90 bg-pink-200/42 ring-2 ring-pink-100/55 shadow-[0_0_30px_rgba(249,168,212,0.16)]",
       idle:
@@ -74,8 +74,8 @@ export default function LofiRoom({
         className="object-cover object-center"
       />
 
-      <div className="absolute inset-0 bg-black/10" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(0,0,0,0.18)_100%)]" />
+      <div className="absolute inset-0" />
+      <div className="pointer-events-none absolute inset-0" />
 
       {buttons.map((button) => (
         <RoomNavButton
