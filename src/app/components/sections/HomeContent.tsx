@@ -148,7 +148,7 @@ export default function HomeContent() {
           Eva <span className="text-purple-300">Liu</span>
         </>
       }
-      description="I enjoy building things end-to-end and learning by doing. Recently, I’ve been spending time strengthening my problem-solving skills through LeetCode while continuing to build projects across the stack."
+      description="Computer Science Bachelors @ University of Washington Paul G. Allen. Previously Software Engineer Lead @ Center for Reproducible Biomedical Modeling"
     >
       <motion.div
         variants={container}
