@@ -9,12 +9,12 @@ export default function SectionShell({
 }: {
   eyebrow?: string;
   title: ReactNode;
-  description?: string;
+  description?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <div className="h-full w-full flex items-start justify-center">
-      <div className="w-full max-w-3xl space-y-8">
+    <div className="w-full flex items-start justify-center">
+      <div className="w-full max-w-3xl space-y-6 sm:space-y-8">
         <SectionHeader
           eyebrow={eyebrow}
           title={title}

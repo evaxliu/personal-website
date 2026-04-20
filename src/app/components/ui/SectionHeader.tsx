@@ -7,7 +7,7 @@ export default function SectionHeader({
 }: {
   eyebrow?: string;
   title: ReactNode;
-  description?: string;
+  description?: ReactNode;
 }) {
   return (
     <div className="space-y-2">
