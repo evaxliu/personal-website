@@ -154,7 +154,7 @@ async function postLeetCode<T>(
       Referer: "https://leetcode.com",
     },
     body: JSON.stringify({ query, variables }),
-    next: { revalidate: 1800 },
+    cache: "no-store",
   });
 
   const rawText = await response.text();

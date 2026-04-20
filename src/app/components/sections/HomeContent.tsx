@@ -42,90 +42,100 @@ const item = {
 export default function HomeContent() {
   const [data, setData] = useState<LeetCodeData | null>(null);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState("");
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+
+  async function fetchLeetCodeData(showLoading = false) {
+    try {
+      if (showLoading) {
+        setInitialLoading(true);
+      } else {
+        setIsRefreshing(true);
+      }
+
+      setError("");
+
+      const res = await fetch(
+        `/api/leetcode?username=${encodeURIComponent(LEETCODE_USERNAME)}`,
+        { cache: "no-store" }
+      );
+      const text = await res.text();
+
+      if (!text) {
+        throw new Error("Your API route returned an empty response.");
+      }
+
+      let json: unknown;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        throw new Error(
+          `Your API route did not return valid JSON: ${text.slice(0, 120)}`
+        );
+      }
+
+      if (!res.ok) {
+        const message =
+          typeof json === "object" &&
+          json !== null &&
+          "error" in json &&
+          typeof json.error === "string"
+            ? json.error
+            : "Failed to fetch LeetCode data";
+
+        throw new Error(message);
+      }
+
+      if (!isLeetCodeData(json)) {
+        throw new Error("API returned an unexpected response shape.");
+      }
+
+      setData(json);
+      setLastUpdated(
+        new Date().toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        })
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      if (showLoading) {
+        setInitialLoading(false);
+      } else {
+        setIsRefreshing(false);
+      }
+    }
+  }
 
   useEffect(() => {
-    let ignore = false;
-    let lastLoadTime = 0;
+    let lastRefreshTime = 0;
 
-    async function load(showLoading = false) {
+    function guardedRefresh(showLoading = false) {
       const now = Date.now();
-      if (now - lastLoadTime < 1000) return;
-      lastLoadTime = now;
+      if (now - lastRefreshTime < 1000) return;
+      lastRefreshTime = now;
 
-      try {
-        if (showLoading) {
-          setInitialLoading(true);
-        }
-
-        setError("");
-
-        const res = await fetch(
-          `/api/leetcode?username=${encodeURIComponent(LEETCODE_USERNAME)}`,
-          { cache: "no-store" }
-        );
-        const text = await res.text();
-
-        if (!text) {
-          throw new Error("Your API route returned an empty response.");
-        }
-
-        let json: unknown;
-        try {
-          json = JSON.parse(text);
-        } catch {
-          throw new Error(
-            `Your API route did not return valid JSON: ${text.slice(0, 120)}`
-          );
-        }
-
-        if (!res.ok) {
-          const message =
-            typeof json === "object" &&
-            json !== null &&
-            "error" in json &&
-            typeof json.error === "string"
-              ? json.error
-              : "Failed to fetch LeetCode data";
-
-          throw new Error(message);
-        }
-
-        if (!isLeetCodeData(json)) {
-          throw new Error("API returned an unexpected response shape.");
-        }
-
-        if (!ignore) {
-          setData(json);
-        }
-      } catch (err) {
-        if (!ignore) {
-          setError(err instanceof Error ? err.message : "Something went wrong");
-        }
-      } finally {
-        if (!ignore && showLoading) {
-          setInitialLoading(false);
-        }
-      }
+      void fetchLeetCodeData(showLoading);
     }
 
     function handleFocus() {
-      load(false);
+      guardedRefresh(false);
     }
 
     function handleVisibilityChange() {
       if (document.visibilityState === "visible") {
-        load(false);
+        guardedRefresh(false);
       }
     }
 
-    load(true);
+    guardedRefresh(true);
 
     window.addEventListener("focus", handleFocus);
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      ignore = true;
       window.removeEventListener("focus", handleFocus);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
@@ -175,9 +185,10 @@ export default function HomeContent() {
       }
       description={
         <>
-          Computer Science graduate @ University of Washington Paul G. Allen.
+          Computer Science Bachelor’s @ University of Washington Paul G. Allen.
           <br />
-          Previously Lead Software Engineer @ Center for Reproducible Biomedical Modeling.
+          Previously Lead Software Engineer @ Center for Reproducible Biomedical
+          Modeling.
         </>
       }
     >
@@ -195,7 +206,7 @@ export default function HomeContent() {
           </motion.div>
         )}
 
-        {error && (
+        {error && !data && (
           <motion.div variants={item}>
             <ContentCard
               className="border-red-400/20 bg-red-400/10 p-4 text-sm text-red-100"
@@ -208,10 +219,23 @@ export default function HomeContent() {
 
         {data && (
           <motion.div variants={item} className="space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <h2 className="text-xl md:text-2xl font-semibold">
-                Live <span className="text-purple-300">LeetCode</span> activity
-              </h2>
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <h2 className="text-xl md:text-2xl font-semibold">
+                  Live <span className="text-purple-300">LeetCode</span> activity
+                </h2>
+                <p className="mt-1 text-xs text-white/50">
+                  {lastUpdated
+                    ? `Last updated at ${lastUpdated}`
+                    : "Not updated yet"}
+                  {isRefreshing ? " · Refreshing..." : ""}
+                </p>
+                {error && (
+                  <p className="mt-1 text-xs text-red-200/90">
+                    Background refresh failed. Showing last successful data.
+                  </p>
+                )}
+              </div>
 
               <a
                 href={`https://leetcode.com/${LEETCODE_USERNAME}/`}
@@ -264,13 +288,13 @@ export default function HomeContent() {
                   <span>More</span>
                 </div>
 
-                <div className="mt-4 grid grid-cols-6 gap-2 sm:gap-2.5 max-w-[220px] sm:max-w-[260px]">
+                <div className="mt-4 grid max-w-[220px] grid-cols-6 gap-2 sm:max-w-[260px] sm:gap-2.5">
                   {heatmap.map((cell) => (
                     <div
                       key={cell.date}
                       className={[
-                        "aspect-square rounded-[6px] border border-white/10",
-                        "min-h-[18px] min-w-[18px] sm:min-h-[20px] sm:min-w-[20px]",
+                        "aspect-square min-h-[18px] min-w-[18px] rounded-[6px] border border-white/10",
+                        "sm:min-h-[20px] sm:min-w-[20px]",
                         getHeatColor(cell.count),
                       ].join(" ")}
                       title={`${cell.date}: ${cell.count} submission${
