@@ -19,6 +19,7 @@ import {
 } from "./home/components";
 
 const LEETCODE_USERNAME = "LilacPlanet";
+const ACTIVITY_DAYS = 30;
 
 const container = {
   hidden: {},
@@ -40,19 +41,28 @@ const item = {
 
 export default function HomeContent() {
   const [data, setData] = useState<LeetCodeData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     let ignore = false;
+    let lastLoadTime = 0;
 
-    async function load() {
+    async function load(showLoading = false) {
+      const now = Date.now();
+      if (now - lastLoadTime < 1000) return;
+      lastLoadTime = now;
+
       try {
-        setLoading(true);
+        if (showLoading) {
+          setInitialLoading(true);
+        }
+
         setError("");
 
         const res = await fetch(
-          `/api/leetcode?username=${encodeURIComponent(LEETCODE_USERNAME)}`
+          `/api/leetcode?username=${encodeURIComponent(LEETCODE_USERNAME)}`,
+          { cache: "no-store" }
         );
         const text = await res.text();
 
@@ -93,21 +103,36 @@ export default function HomeContent() {
           setError(err instanceof Error ? err.message : "Something went wrong");
         }
       } finally {
-        if (!ignore) {
-          setLoading(false);
+        if (!ignore && showLoading) {
+          setInitialLoading(false);
         }
       }
     }
 
-    load();
+    function handleFocus() {
+      load(false);
+    }
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        load(false);
+      }
+    }
+
+    load(true);
+
+    window.addEventListener("focus", handleFocus);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       ignore = true;
+      window.removeEventListener("focus", handleFocus);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
   const heatmap = useMemo(() => {
-    return data ? buildRecentHeatmap(data.calendar, 35) : [];
+    return data ? buildRecentHeatmap(data.calendar, ACTIVITY_DAYS) : [];
   }, [data]);
 
   const topTags = useMemo(() => {
@@ -148,7 +173,7 @@ export default function HomeContent() {
           Eva <span className="text-purple-300">Liu</span>
         </>
       }
-      description="Computer Science Bachelors @ University of Washington Paul G. Allen. Previously Software Engineer Lead @ Center for Reproducible Biomedical Modeling"
+      description="I enjoy building things end-to-end and learning by doing. Recently, I’ve been spending time strengthening my problem-solving skills through LeetCode while continuing to build projects across the stack."
     >
       <motion.div
         variants={container}
@@ -156,7 +181,7 @@ export default function HomeContent() {
         animate="show"
         className="space-y-5"
       >
-        {loading && (
+        {initialLoading && (
           <motion.div variants={item}>
             <ContentCard className="p-4 text-sm text-white/70" hover={false}>
               Loading live LeetCode data...
@@ -216,13 +241,30 @@ export default function HomeContent() {
             </div>
 
             <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1.1fr_0.9fr]">
-              <PanelCard title="Activity" subtitle="Last 35 days">
-                <div className="grid max-w-65 grid-cols-7 gap-1">
+              <PanelCard title="Activity" subtitle={`Last ${ACTIVITY_DAYS} days`}>
+                <div className="flex items-center justify-between gap-3 text-[11px] text-white/55">
+                  <span>Less</span>
+                  <div className="flex items-center gap-1.5">
+                    {[0, 1, 2, 4, 6].map((value) => (
+                      <div
+                        key={value}
+                        className={[
+                          "h-3.5 w-3.5 rounded-[4px] border border-white/10",
+                          getHeatColor(value),
+                        ].join(" ")}
+                      />
+                    ))}
+                  </div>
+                  <span>More</span>
+                </div>
+
+                <div className="mt-4 grid grid-cols-6 gap-2 sm:gap-2.5 max-w-[220px] sm:max-w-[260px]">
                   {heatmap.map((cell) => (
                     <div
                       key={cell.date}
                       className={[
-                        "aspect-square rounded-[5px] border border-white/10",
+                        "aspect-square rounded-[6px] border border-white/10",
+                        "min-h-[18px] min-w-[18px] sm:min-h-[20px] sm:min-w-[20px]",
                         getHeatColor(cell.count),
                       ].join(" ")}
                       title={`${cell.date}: ${cell.count} submission${

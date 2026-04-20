@@ -9,38 +9,38 @@ export function formatDate(timestamp: string) {
 }
 
 export function getHeatColor(value: number) {
-  if (value === 0) return "bg-white/10";
-  if (value <= 1) return "bg-purple-400/30";
-  if (value <= 2) return "bg-purple-400/45";
-  if (value <= 4) return "bg-purple-400/65";
-  return "bg-purple-300/90";
+  if (value === 0) return "bg-white/8";
+  if (value === 1) return "bg-purple-400/30";
+  if (value <= 3) return "bg-purple-400/50";
+  if (value <= 5) return "bg-purple-400/70";
+  return "bg-purple-300/95";
+}
+
+function getUTCDateKey(date: Date) {
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(date.getUTCDate()).padStart(2, "0")}`;
 }
 
 export function buildRecentHeatmap(
   calendar: Record<string, number>,
-  days = 35
+  days = 30
 ) {
-  const today = new Date();
   const countsByDate = new Map<string, number>();
 
   for (const [timestamp, count] of Object.entries(calendar)) {
-    const d = new Date(Number(timestamp) * 1000);
-    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(d.getDate()).padStart(2, "0")}`;
-
+    const date = new Date(Number(timestamp) * 1000);
+    const key = getUTCDateKey(date);
     countsByDate.set(key, count);
   }
 
   return Array.from({ length: days }, (_, index) => {
-    const d = new Date(today);
-    d.setDate(today.getDate() - (days - 1 - index));
+    const date = new Date();
+    date.setUTCHours(0, 0, 0, 0);
+    date.setUTCDate(date.getUTCDate() - (days - 1 - index));
 
-    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(d.getDate()).padStart(2, "0")}`;
+    const key = getUTCDateKey(date);
 
     return {
       date: key,
