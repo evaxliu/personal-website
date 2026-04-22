@@ -7,8 +7,7 @@ import HomeContent from "@/app/components/sections/HomeContent";
 import AboutContent from "@/app/components/sections/AboutContent";
 import ExperienceContent from "@/app/components/sections/ExperienceContent";
 import ProjectsContent from "@/app/components/sections/ProjectsContent";
-
-export type Section = "home" | "about" | "experience" | "projects";
+import type { Section } from "@/app/types";
 
 export default function HomeClient() {
   const [section, setSection] = useState<Section>("home");

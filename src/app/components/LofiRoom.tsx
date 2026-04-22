@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { Section } from "@/app/page";
+import type { Section } from "@/app/types";
 import RoomNavButton from "@/app/components/ui/RoomNavButton";
 
 type NavButtonConfig = {
