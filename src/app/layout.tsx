@@ -1,16 +1,6 @@
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
 
-export const metadata = {
-  title: "Eva Liu",
-  icons: {
-    icon: [
-      { url: "/room.ico" },
-      { url: "/room.png", sizes: "48x48", type: "image/png" },
-    ]
-  }
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

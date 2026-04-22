@@ -8,6 +8,17 @@ import AboutContent from "@/app/components/sections/AboutContent";
 import ExperienceContent from "@/app/components/sections/ExperienceContent";
 import ProjectsContent from "@/app/components/sections/ProjectsContent";
 
+export const metadata = {
+  title: "Eva Liu",
+  icons: {
+    icon: [
+      { url: "/room.ico" },
+      { url: "/room.png", sizes: "48x48", type: "image/png" },
+    ]
+  }
+};
+
+
 export type Section = "home" | "about" | "experience" | "projects";
 
 export default function Home() {
