@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: "Eva Liu",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="h-full flex flex-col">
           <main className="flex-1 min-h-0">{children}</main>
         </div>
+        <Analytics />
       </body>
     </html>
   );
