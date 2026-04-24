@@ -169,7 +169,10 @@ async function postLeetCode<T>(
     parsed = JSON.parse(rawText) as GraphQLPayload<T>;
   } catch {
     throw new Error(
-      `LeetCode returned non-JSON (${response.status}): ${rawText.slice(0, 120)}`
+      `LeetCode returned non-JSON (${response.status}): ${rawText.slice(
+        0,
+        120
+      )}`
     );
   }
 
@@ -187,6 +190,16 @@ async function postLeetCode<T>(
   return parsed.data;
 }
 
+function parseSubmissionCalendar(calendar?: string) {
+  if (!calendar) return {};
+
+  try {
+    return JSON.parse(calendar) as Record<string, number>;
+  } catch {
+    return {};
+  }
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -198,7 +211,7 @@ export async function GET(request: Request) {
 
     const currentYear = new Date().getFullYear();
 
-    const [profileData, calendarData, recentData] = await Promise.all([
+    const [profileData, initialCalendarData, recentData] = await Promise.all([
       postLeetCode<ProfileQueryData>(profileQuery, { username }),
       postLeetCode<CalendarQueryData>(calendarQuery, {
         username,
@@ -208,7 +221,7 @@ export async function GET(request: Request) {
     ]);
 
     const matchedUser = profileData?.matchedUser;
-    const userCalendar = calendarData?.matchedUser?.userCalendar;
+    const initialCalendar = initialCalendarData?.matchedUser?.userCalendar;
     const recentSubmissionList = recentData?.recentSubmissionList ?? [];
 
     if (!matchedUser) {
@@ -217,6 +230,35 @@ export async function GET(request: Request) {
         { status: 404 }
       );
     }
+
+    const activeYears = initialCalendar?.activeYears?.length
+      ? initialCalendar.activeYears
+      : [currentYear];
+
+    const calendarResults = await Promise.all(
+      activeYears.map((year) =>
+        postLeetCode<CalendarQueryData>(calendarQuery, {
+          username,
+          year,
+        })
+      )
+    );
+
+    const mergedCalendar: Record<string, number> = {};
+
+    for (const result of calendarResults) {
+      const calendar = parseSubmissionCalendar(
+        result?.matchedUser?.userCalendar?.submissionCalendar
+      );
+
+      for (const [timestamp, count] of Object.entries(calendar)) {
+        mergedCalendar[timestamp] = count;
+      }
+    }
+
+    const lifetimeActiveDays = Object.values(mergedCalendar).filter(
+      (count) => count > 0
+    ).length;
 
     const acStats = matchedUser.submitStatsGlobal?.acSubmissionNum ?? [];
 
@@ -229,15 +271,6 @@ export async function GET(request: Request) {
     const hardSolved =
       acStats.find((item) => item.difficulty === "Hard")?.count ?? 0;
 
-    let parsedCalendar: Record<string, number> = {};
-    try {
-      parsedCalendar = userCalendar?.submissionCalendar
-        ? (JSON.parse(userCalendar.submissionCalendar) as Record<string, number>)
-        : {};
-    } catch {
-      parsedCalendar = {};
-    }
-
     return NextResponse.json({
       username: matchedUser.username,
       profile: matchedUser.profile ?? null,
@@ -247,9 +280,9 @@ export async function GET(request: Request) {
         mediumSolved,
         hardSolved,
       },
-      streak: userCalendar?.streak ?? 0,
-      totalActiveDays: userCalendar?.totalActiveDays ?? 0,
-      calendar: parsedCalendar,
+      streak: initialCalendar?.streak ?? 0,
+      totalActiveDays: lifetimeActiveDays,
+      calendar: mergedCalendar,
       recentSubmissions: recentSubmissionList,
       languages: matchedUser.languageProblemCount ?? [],
       tagProblemCounts: matchedUser.tagProblemCounts ?? {

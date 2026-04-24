@@ -9,6 +9,7 @@ import {
   buildRecentHeatmap,
   getHeatColor,
   isLeetCodeData,
+  getLongestStreak,
 } from "./home/home.utils";
 import {
   PanelCard,
@@ -143,6 +144,10 @@ export default function HomeContent() {
     return data ? buildRecentHeatmap(data.calendar, ACTIVITY_DAYS) : [];
   }, [data]);
 
+  const longestStreak = useMemo(() => {
+    return data ? getLongestStreak(data.calendar) : 0;
+  }, [data]);
+
   const uniqueRecentSubmissions = useMemo(() => {
     if (!data) return [];
 
@@ -243,19 +248,19 @@ export default function HomeContent() {
                 valueClassName="text-purple-300"
               />
               <StatCard
-                label="Streak"
-                value={data.streak}
+                label="Lifetime Active Days"
+                value={data.totalActiveDays}
+                valueClassName="text-emerald-300"
+              />
+              <StatCard
+                label="Current Streak"
+                value={`${data.streak} days`}
                 valueClassName="text-amber-300"
               />
               <StatCard
-                label="Ranking"
-                value={`#${data.profile?.ranking?.toLocaleString?.() ?? "—"}`}
+                label="Best Streak"
+                value={`${longestStreak} days`}
                 valueClassName="text-sky-300"
-              />
-              <StatCard
-                label="Active Days"
-                value={data.totalActiveDays}
-                valueClassName="text-emerald-300"
               />
             </div>
 

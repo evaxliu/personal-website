@@ -49,6 +49,42 @@ export function buildRecentHeatmap(
   });
 }
 
+export function getLongestStreak(calendar: Record<string, number>) {
+  const activeDates = new Set<string>();
+
+  for (const [timestamp, count] of Object.entries(calendar)) {
+    if (count > 0) {
+      const date = new Date(Number(timestamp) * 1000);
+      activeDates.add(getUTCDateKey(date));
+    }
+  }
+
+  const sortedDates = Array.from(activeDates).sort();
+
+  let longest = 0;
+  let current = 0;
+  let previousDate: Date | null = null;
+
+  for (const dateKey of sortedDates) {
+    const currentDate = new Date(`${dateKey}T00:00:00Z`);
+
+    if (!previousDate) {
+      current = 1;
+    } else {
+      const diffDays =
+        (currentDate.getTime() - previousDate.getTime()) /
+        (1000 * 60 * 60 * 24);
+
+      current = diffDays === 1 ? current + 1 : 1;
+    }
+
+    longest = Math.max(longest, current);
+    previousDate = currentDate;
+  }
+
+  return longest;
+}
+
 export function mergeTopTags(data: LeetCodeData["tagProblemCounts"]) {
   return [...data.fundamental, ...data.intermediate, ...data.advanced]
     .sort((a, b) => b.problemsSolved - a.problemsSolved)
