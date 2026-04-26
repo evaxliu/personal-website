@@ -200,6 +200,25 @@ function parseSubmissionCalendar(calendar?: string) {
   }
 }
 
+function getCurrentStreak(calendar: Record<string, number>) {
+  let streak = 0;
+  const day = new Date();
+
+  day.setHours(0, 0, 0, 0);
+
+  while (true) {
+    const timestamp = Math.floor(day.getTime() / 1000).toString();
+    const count = calendar[timestamp] ?? 0;
+
+    if (count <= 0) break;
+
+    streak++;
+    day.setDate(day.getDate() - 1);
+  }
+
+  return streak;
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -280,7 +299,7 @@ export async function GET(request: Request) {
         mediumSolved,
         hardSolved,
       },
-      streak: initialCalendar?.streak ?? 0,
+      streak: getCurrentStreak(mergedCalendar),
       totalActiveDays: lifetimeActiveDays,
       calendar: mergedCalendar,
       recentSubmissions: recentSubmissionList,
