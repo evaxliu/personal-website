@@ -200,7 +200,7 @@ export default function HomeContent() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="max-h-[calc(100vh-8rem)] space-y-3 overflow-hidden"
+        className="max-h-[calc(100vh-8rem)] -mt-3 space-y-3 overflow-hidden"
       >
         {initialLoading && (
           <motion.div variants={item}>
@@ -347,7 +347,6 @@ export default function HomeContent() {
 
               <PanelCard
                 title="Recent submissions"
-                subtitle="Unique problems from LeetCode"
               >
                 <div className="relative min-h-0">
                   <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 h-10 rounded-b-2xl bg-gradient-to-t from-[#15101f] to-transparent" />
