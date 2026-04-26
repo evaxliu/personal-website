@@ -148,7 +148,7 @@ export default function HomeContent() {
     return data ? getLongestStreak(data.calendar) : 0;
   }, [data]);
 
-  const uniqueRecentSubmissions = useMemo(() => {
+  const recentProblems = useMemo(() => {
     if (!data) return [];
 
     const grouped = new Map<string, typeof data.recentSubmissions>();
@@ -189,8 +189,9 @@ export default function HomeContent() {
           Previously Lead Software Engineer @ Center for Reproducible Biomedical
           Modeling.
           <br />
-          Currently focused on <span className="text-purple-300">grad school apps</span>,{" "}
-          studying <span className="text-purple-300">LeetCode</span>, and personal{" "}
+          Currently focused on{" "}
+          <span className="text-purple-300">grad school apps</span>, studying{" "}
+          <span className="text-purple-300">LeetCode</span>, and personal{" "}
           <span className="text-purple-300">projects</span>.
         </>
       }
@@ -199,7 +200,7 @@ export default function HomeContent() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="space-y-5"
+        className="max-h-[calc(100vh-8rem)] space-y-3 overflow-hidden"
       >
         {initialLoading && (
           <motion.div variants={item}>
@@ -221,11 +222,12 @@ export default function HomeContent() {
         )}
 
         {data && (
-          <motion.div variants={item} className="space-y-4">
-            <div className="flex flex-wrap items-start justify-between gap-4">
+          <motion.div variants={item} className="space-y-3">
+            <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h2 className="text-xl md:text-2xl font-semibold">
-                  Live <span className="text-purple-300">LeetCode</span> activity
+                <h2 className="text-lg font-semibold md:text-xl">
+                  Live <span className="text-purple-300">LeetCode</span>{" "}
+                  activity
                 </h2>
                 <p className="mt-1 text-xs text-white/50">
                   {lastUpdated
@@ -241,7 +243,7 @@ export default function HomeContent() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 xl:grid-cols-4">
               <StatCard
                 label="Solved"
                 value={data.stats.totalSolved}
@@ -264,8 +266,11 @@ export default function HomeContent() {
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1.1fr_0.9fr]">
-              <PanelCard title="Activity" subtitle={`Last ${ACTIVITY_DAYS} days`}>
+            <div className="grid min-h-0 grid-cols-1 gap-2 xl:grid-cols-[1.1fr_0.9fr]">
+              <PanelCard
+                title="Activity"
+                subtitle={`Last ${ACTIVITY_DAYS} days`}
+              >
                 <div className="flex items-center justify-between gap-3 text-[11px] text-white/55">
                   <span>Less</span>
                   <div className="flex items-center gap-1.5">
@@ -282,13 +287,13 @@ export default function HomeContent() {
                   <span>More</span>
                 </div>
 
-                <div className="mt-4 grid max-w-55 grid-cols-6 gap-2 sm:max-w-65 sm:gap-2.5">
+                <div className="mt-3 grid max-w-55 grid-cols-6 gap-1.5 sm:max-w-65 sm:gap-2">
                   {heatmap.map((cell) => (
                     <div
                       key={cell.date}
                       className={[
-                        "aspect-square min-h-4.5 min-w-4.5 rounded-md border border-white/10",
-                        "sm:min-h-5 sm:min-w-5",
+                        "aspect-square min-h-4 min-w-4 rounded-md border border-white/10",
+                        "sm:min-h-4.5 sm:min-w-4.5",
                         getHeatColor(cell.count),
                       ].join(" ")}
                       title={`${cell.date}: ${cell.count} submission${
@@ -298,7 +303,7 @@ export default function HomeContent() {
                   ))}
                 </div>
 
-                <div className="mt-4 grid grid-cols-3 gap-2">
+                <div className="mt-3 grid grid-cols-3 gap-2">
                   {[
                     {
                       label: "Easy",
@@ -340,21 +345,38 @@ export default function HomeContent() {
                 </div>
               </PanelCard>
 
-              <PanelCard title="Recent submissions">
-                <div className="space-y-2">
-                  {uniqueRecentSubmissions.length === 0 ? (
-                    <p className="text-sm text-white/60">
-                      No recent submissions available.
-                    </p>
-                  ) : (
-                    uniqueRecentSubmissions
-                      .slice(0, 4)
-                      .map((submission) => (
+              <PanelCard
+                title="Recent submissions"
+                subtitle="Unique problems from LeetCode"
+              >
+                <div className="relative min-h-0">
+                  <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 h-10 rounded-b-2xl bg-gradient-to-t from-[#15101f] to-transparent" />
+
+                  <div
+                    className={[
+                      "max-h-[32vh] min-h-0 space-y-2 overflow-y-auto pr-2",
+                      "scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-purple-300/40",
+                      "hover:scrollbar-thumb-purple-300/70",
+                    ].join(" ")}
+                  >
+                    {recentProblems.length === 0 ? (
+                      <p className="text-sm text-white/60">
+                        No recent submissions available.
+                      </p>
+                    ) : (
+                      recentProblems.map((submission) => (
                         <SubmissionItem
                           key={`${submission.titleSlug}-${submission.timestamp}`}
                           submission={submission}
                         />
                       ))
+                    )}
+                  </div>
+
+                  {recentProblems.length > 4 && (
+                    <p className="mt-2 text-center text-[11px] text-purple-200/60">
+                      Scroll to see more
+                    </p>
                   )}
                 </div>
               </PanelCard>
