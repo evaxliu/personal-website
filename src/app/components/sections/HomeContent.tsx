@@ -200,7 +200,7 @@ export default function HomeContent() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="max-h-[calc(100vh-8rem)] -mt-3 space-y-3 overflow-hidden"
+        className="max-h-[calc(100vh-8rem)] -mt-3 space-y-3"
       >
         {initialLoading && (
           <motion.div variants={item}>
