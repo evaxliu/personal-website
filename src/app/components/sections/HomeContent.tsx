@@ -194,8 +194,8 @@ export default function HomeContent() {
           <span className="text-purple-300">projects</span>.
           <br />
           <a
-            href="/Eva_Liu_Resume.pdf"
-            download
+            href="/EvaLiuResume.pdf"
+            download="EvaLiuResume.pdf"
             className="text-purple-300 text-sm font-medium underline transition hover:text-purple-200"
           >
             Download Resume
@@ -207,7 +207,7 @@ export default function HomeContent() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="max-h-[calc(100vh-8rem)] -mt-3 space-y-3"
+        className="-mt-3 space-y-3 pb-10 sm:pb-0"
       >
         {initialLoading && (
           <motion.div variants={item}>

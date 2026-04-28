@@ -35,13 +35,6 @@ export default function AboutContent() {
             <p>
               I mostly work across the stack and enjoy building tools end-to-end.
             </p>
-
-            <p>
-              Lately, I’ve been spending time improving my problem-solving skills,
-              getting into machine learning through a stock analysis project, and
-              building a small blog platform. I like working on things where I’m able to
-              develop my skills. I’m also in the process of applying to grad school.
-            </p>
           </div>
         </ContentCard>
       </div>

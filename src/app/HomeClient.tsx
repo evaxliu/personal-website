@@ -14,12 +14,12 @@ export default function HomeClient() {
 
   return (
     <div className="h-full grid grid-cols-1 lg:grid-cols-2">
-      <div className="relative h-[45vh] lg:h-full lg:sticky lg:top-0">
+      <div className="relative h-[30vh] min-h-55 max-h-80 lg:h-full lg:max-h-none lg:sticky lg:top-0">
         <LofiRoom activeSection={section} onSelectSection={setSection} />
         <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
       </div>
 
-      <div className="hide-scrollbar h-full overflow-y-auto flex items-start justify-center px-8 py-12">
+      <div className="hide-scrollbar h-full overflow-y-auto flex items-start justify-center px-4 py-8 sm:px-8 sm:py-12">
         <div className="w-full">
           <AnimatePresence mode="wait">
             <motion.div
