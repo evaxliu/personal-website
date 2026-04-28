@@ -4,53 +4,65 @@ import ContentCard from "@/app/components/ui/ContentCard";
 export default function ProjectsContent() {
   const projects = [
     {
-      title: "Blog Platform",
-      link: "https://github.com/evaxliu/rice-thoughts",
-      date: "July 2025 – Present",
-      items: [
-        "Designed and developed a content-driven web platform using Next.js, React, and TypeScript with Wisp CMS for structured content management and dynamic rendering.",
-        "Implemented modular page architecture to support reusable layouts and scalable content organization.",
-        "Built initial system for content delivery and rendering with plans to extend functionality with tag-based filtering and discovery features.",
-      ],
-    },
-    {
-      title: "Personal Website",
-      link: "https://github.com/evaxliu/personal-website",
-      date: "July 2025 – Present",
-      items: [
-        "Developed a Next.js personal website with an interactive homepage that maps room elements to section navigation.",
-        "Implemented reusable section components for About, Experience, and Projects to support a modular content structure.",
-        "Used responsive Tailwind CSS layouts and client-side state management to create a polished, mobile-friendly experience.",
-        "Optimized page rendering and image display for a smoother visual experience.",
-      ],
-    },
-    {
       title: "Antimony Web Editor",
       link: "https://github.com/sys-bio/AntimonyEditor",
       date: "July 2023 – September 2024",
+      tech: "React, TypeScript, Monaco Editor, ANTLR",
+      highlighted: true,
+      summary:
+        "Built a browser-based Antimony editor for systems biology modeling, supporting in-browser computational model development.",
       items: [
-        "Built a React/TypeScript web editor for the Antimony modeling language using Monaco Editor, enabling in-browser systems biology model development for research workflows.",
-        "Implemented core language-processing capabilities for Antimony, including grammar recognition, syntax highlighting, and contextual hover documentation, powering an improved experience for computational modeling.",
+        "Implemented grammar recognition, syntax highlighting, and contextual hover documentation.",
+        "Improved authoring workflows for researchers designing and editing biological simulation models.",
       ],
     },
     {
       title: "VSCode-Antimony Extension",
       link: "https://github.com/sys-bio/vscode-antimony",
       date: "July 2022 – August 2023",
+      tech: "TypeScript, Python, VSCode API, Bash, Batch",
+      highlighted: true,
+      summary:
+        "Developed core features for a VS Code Antimony extension with 1,000+ Marketplace users.",
       items: [
-        "Developed core features for a VS Code Antimony extension with 1,000+ users on the Marketplace, expanding accessibility of systems biology modeling workflows.",
-        "Engineered automated installation pipeline (Python + TypeScript), streamlining onboarding and reducing user setup friction.",
-        "Designed editor-level features including variable annotations and dynamic rate law insertion via VS Code APIs, improving model clarity and reducing manual authoring effort.",
+        "Engineered an automated installation pipeline to reduce user setup friction.",
+        "Built editor features including variable annotations and dynamic rate law insertion.",
+      ],
+    },
+    {
+      title: "Personal Website",
+      link: "https://github.com/evaxliu/personal-website",
+      date: "July 2025 – Present",
+      tech: "Next.js, React, Tailwind CSS, TypeScript",
+      summary:
+        "Built an interactive portfolio site with room-based navigation, modular sections, and responsive layouts.",
+      items: [
+        "Implemented reusable About, Experience, and Projects sections with client-side state management.",
+        "Optimized rendering and image display for a polished, mobile-friendly experience.",
+      ],
+    },
+    {
+      title: "Blog Platform",
+      link: "https://github.com/evaxliu/rice-thoughts",
+      date: "July 2025 – Present",
+      tech: "Next.js, React, TypeScript, Wisp CMS",
+      summary:
+        "Designed a content-driven blog platform with structured CMS content and dynamic rendering.",
+      items: [
+        "Built modular page architecture for reusable layouts and scalable content organization.",
+        "Created the foundation for content delivery with planned tag-based filtering and discovery.",
       ],
     },
     {
       title: "Pet My Dog",
       link: "https://github.com/evaliu2002/PetMyDog",
       date: "March 2022 – June 2022",
+      tech: "React, Java, Elasticsearch, Jest, CircleCI, JavaScript",
+      summary:
+        "Developed a multi-page React app for dog owners to share real-time location and connect with nearby users.",
       items: [
-        "Designed and developed a multi-page React web application enabling dog owners to broadcast their real-time location and connect with nearby users for in-person dog petting opportunities.",
-        "Collaborated with a team to implement real-time location tracking, intuitive user interfaces and interaction features, and managed design iterations based on feedback to enhance overall user experience.",
-        "Developed robust features to retrieve user input, validate and process data, and store user information in a backend database.",
+        "Built real-time location tracking, user interaction flows, validation, and backend data storage.",
+        "Collaborated on interface design and iterated based on feedback to improve the user experience.",
       ],
     },
   ];
@@ -59,29 +71,51 @@ export default function ProjectsContent() {
     <SectionShell
       eyebrow="Featured work"
       title={<span className="text-purple-300">Projects</span>}
-      description="A few projects that reflect the kinds of tools and interfaces I enjoy building."
+      description="Fun projects I’ve built."
     >
       <div className="space-y-6">
-        {projects.map((p) => (
-          <ContentCard key={p.title} className="p-6">
-            <p className="font-semibold text-white/95">{p.title}</p>
+        {projects.map((project) => (
+          <ContentCard key={project.title} className="p-6">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className={[
+                    "font-semibold transition",
+                    project.highlighted ? "text-purple-300" : "text-white/95",
+                  ].join(" ")}
+                >
+                  {project.title}
+                </a>
 
-            <a
-              className="mt-3 inline-block break-all text-sm text-purple-300 transition hover:text-purple-200"
-              href={p.link}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {p.link.replace("https://", "")}
-            </a>
+                <p className="mt-1 text-sm text-white/60">{project.date}</p>
+              </div>
 
-            <p className="mt-1 text-sm text-white/60">{p.date}</p>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-purple-300/20 bg-purple-300/10 px-3 py-1 text-xs font-medium text-purple-200 transition hover:border-purple-300/40 hover:bg-purple-300/20"
+              >
+                GitHub
+              </a>
+            </div>
+
+            <p className="mt-4 text-white/80 leading-relaxed">
+              {project.summary}
+            </p>
 
             <ul className="mt-4 list-disc space-y-2 pl-5 text-white/80 leading-relaxed">
-              {p.items.map((item, idx) => (
-                <li key={idx}>{item}</li>
+              {project.items.map((item) => (
+                <li key={item}>{item}</li>
               ))}
             </ul>
+
+            <p className="mt-4 text-sm text-white/55">
+              <span className="text-purple-200 font-medium">Tech:</span>{" "}
+              {project.tech}
+            </p>
           </ContentCard>
         ))}
       </div>

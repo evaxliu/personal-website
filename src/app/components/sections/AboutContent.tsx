@@ -17,7 +17,7 @@ export default function AboutContent() {
       <div className="space-y-6">
         <ContentCard className="p-6">
           <div className="space-y-5 text-white/80 leading-relaxed">
-            <p>I’m Eva Liu.</p>
+            <p className="font-semibold text-purple-300">I’m Eva Liu.</p>
 
             <p>
               I really like coding and tend to spend a lot of time building things.

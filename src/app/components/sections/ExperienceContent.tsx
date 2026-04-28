@@ -14,15 +14,30 @@ export default function ExperienceContent() {
     >
       <div className="space-y-6">
         <ContentCard className="p-6">
-          <p className="font-semibold text-white/95">
-            Center for Reproducible Biomedical Modeling (CRBM)
-          </p>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="font-semibold text-purple-300">
+                Software Engineer &#8594; Lead Software Engineer / Consultant
+              </p>
 
-          <p className="mt-4 text-purple-200 font-medium">
-            Software Engineer &#8594; Lead Software Engineer / Consultant
-          </p>
+              <p className="mt-1 text-sm text-white/75">
+                Center for Reproducible Biomedical Modeling (CRBM)
+              </p>
 
-          <p className="mt-1 text-sm text-white/60">July 2022 – December 2024</p>
+              <p className="mt-1 text-sm text-white/60">
+                July 2022 – December 2024
+              </p>
+            </div>
+
+            <a
+              href="https://reproduciblebiomodels.org/about/#team"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-purple-300/20 bg-purple-300/10 px-3 py-1 text-xs font-medium text-purple-200 transition hover:border-purple-300/40 hover:bg-purple-300/20"
+            >
+              CRBM
+            </a>
+          </div>
 
           <ul className="mt-4 list-disc space-y-2 pl-5 text-white/80 leading-relaxed">
             <li>

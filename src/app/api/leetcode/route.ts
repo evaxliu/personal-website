@@ -146,7 +146,7 @@ type RecentQueryData = {
 async function postLeetCode<T>(
   query: string,
   variables: Record<string, unknown>
-) {
+): Promise<T | undefined> {
   const response = await fetch(LEETCODE_GRAPHQL_URL, {
     method: "POST",
     headers: {

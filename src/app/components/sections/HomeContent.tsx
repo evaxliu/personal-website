@@ -155,21 +155,20 @@ export default function HomeContent() {
 
     for (const submission of data.recentSubmissions) {
       const existing = grouped.get(submission.titleSlug) ?? [];
-      existing.push(submission);
-      grouped.set(submission.titleSlug, existing);
+      grouped.set(submission.titleSlug, [...existing, submission]);
     }
 
     return Array.from(grouped.values())
       .map((submissions) => {
-        const sorted = [...submissions].sort(
+        const sortedNewestFirst = [...submissions].sort(
           (a, b) => Number(b.timestamp) - Number(a.timestamp)
         );
 
-        const accepted = sorted.find((submission) =>
+        const accepted = sortedNewestFirst.find((submission) =>
           submission.statusDisplay.toLowerCase().includes("accepted")
         );
 
-        return accepted ?? sorted[0];
+        return accepted ?? sortedNewestFirst[0];
       })
       .sort((a, b) => Number(b.timestamp) - Number(a.timestamp));
   }, [data]);
@@ -193,6 +192,14 @@ export default function HomeContent() {
           <span className="text-purple-300">grad school apps</span>, studying{" "}
           <span className="text-purple-300">LeetCode</span>, and personal{" "}
           <span className="text-purple-300">projects</span>.
+          <br />
+          <a
+            href="/Eva_Liu_Resume.pdf"
+            download
+            className="text-purple-300 text-sm font-medium underline transition hover:text-purple-200"
+          >
+            Download Resume
+          </a>
         </>
       }
     >
@@ -345,17 +352,17 @@ export default function HomeContent() {
                 </div>
               </PanelCard>
 
-              <PanelCard
-                title="Recent submissions"
-              >
+              <PanelCard title="Recent submissions">
                 <div className="relative min-h-0">
-                  <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 h-10 rounded-b-2xl bg-gradient-to-t from-[#15101f] to-transparent" />
-
                   <div
                     className={[
-                      "max-h-[32vh] min-h-0 space-y-2 overflow-y-auto pr-2",
-                      "scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-purple-300/40",
-                      "hover:scrollbar-thumb-purple-300/70",
+                      "max-h-[32vh] min-h-0 space-y-2 overflow-y-auto pr-1",
+                      "[scrollbar-gutter:stable]",
+                      "[&::-webkit-scrollbar]:w-1.5",
+                      "[&::-webkit-scrollbar-track]:bg-transparent",
+                      "[&::-webkit-scrollbar-thumb]:rounded-full",
+                      "[&::-webkit-scrollbar-thumb]:bg-white/10",
+                      "hover:[&::-webkit-scrollbar-thumb]:bg-purple-300/35",
                     ].join(" ")}
                   >
                     {recentProblems.length === 0 ? (
@@ -371,12 +378,6 @@ export default function HomeContent() {
                       ))
                     )}
                   </div>
-
-                  {recentProblems.length > 4 && (
-                    <p className="mt-2 text-center text-[11px] text-purple-200/60">
-                      Scroll to see more
-                    </p>
-                  )}
                 </div>
               </PanelCard>
             </div>
