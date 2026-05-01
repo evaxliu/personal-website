@@ -30,18 +30,6 @@ export default function ProjectsContent() {
       ],
     },
     {
-      title: "Personal Website",
-      link: "https://github.com/evaxliu/personal-website",
-      date: "July 2025 – Present",
-      tech: "Next.js, React, Tailwind CSS, TypeScript",
-      summary:
-        "Built an interactive portfolio site with room-based navigation, modular sections, and responsive layouts.",
-      items: [
-        "Implemented reusable About, Experience, and Projects sections with client-side state management.",
-        "Optimized rendering and image display for a polished, mobile-friendly experience.",
-      ],
-    },
-    {
       title: "Blog Platform",
       link: "https://github.com/evaxliu/rice-thoughts",
       date: "July 2025 – Present",
