@@ -4,13 +4,11 @@ import ContentCard from "@/app/components/ui/ContentCard";
 export default function ExperienceContent() {
   return (
     <SectionShell
-      eyebrow="Work"
       title={
         <>
           Work <span className="text-purple-300">Experience</span>
         </>
       }
-      description="Experience building research and developer-facing tools across the stack."
     >
       <div className="space-y-6">
         <ContentCard className="p-6">

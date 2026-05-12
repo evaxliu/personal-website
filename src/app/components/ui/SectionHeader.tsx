@@ -1,22 +1,14 @@
 import { ReactNode } from "react";
 
 export default function SectionHeader({
-  eyebrow,
   title,
   description,
 }: {
-  eyebrow?: string;
   title: ReactNode;
   description?: ReactNode;
 }) {
   return (
     <div className="space-y-2">
-      {eyebrow && (
-        <p className="text-[11px] uppercase tracking-[0.22em] text-white/45">
-          {eyebrow}
-        </p>
-      )}
-
       <div className="text-3xl font-semibold">{title}</div>
 
       {description && (

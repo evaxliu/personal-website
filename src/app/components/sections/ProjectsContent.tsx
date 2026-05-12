@@ -57,9 +57,7 @@ export default function ProjectsContent() {
 
   return (
     <SectionShell
-      eyebrow="Featured work"
       title={<span className="text-purple-300">Projects</span>}
-      description="Fun projects I’ve built."
     >
       <div className="space-y-6">
         {projects.map((project) => (

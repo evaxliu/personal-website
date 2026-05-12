@@ -175,7 +175,6 @@ export default function HomeContent() {
 
   return (
     <SectionShell
-      eyebrow="Welcome"
       title={
         <>
           Eva <span className="text-purple-300">Liu</span>

@@ -6,13 +6,11 @@ import ContentCard from "@/app/components/ui/ContentCard";
 export default function AboutContent() {
   return (
     <SectionShell
-      eyebrow="Get to know me"
       title={
         <>
           <span className="text-purple-300">About</span> me
         </>
       }
-      description="A little more about what I enjoy building and the kind of work I’m drawn to."
     >
       <div className="space-y-6">
         <ContentCard className="p-6">
