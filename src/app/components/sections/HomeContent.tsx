@@ -230,9 +230,7 @@ export default function HomeContent() {
       >
         {initialLoading && (
           <motion.div variants={item}>
-            <ContentCard className="p-4 text-sm text-white/70" hover={false}>
-              Loading live LeetCode data...
-            </ContentCard>
+            Loading live LeetCode data...
           </motion.div>
         )}
 
@@ -248,7 +246,7 @@ export default function HomeContent() {
         )}
 
         {data && (
-          <motion.div variants={item} className="space-y-3">
+          <motion.div variants={item} className="space-y-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h2 className="text-lg font-semibold md:text-xl">
