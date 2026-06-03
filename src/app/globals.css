@@ -2,13 +2,18 @@
 
 body {
   margin: 0;
+  background: #070711;
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
 }

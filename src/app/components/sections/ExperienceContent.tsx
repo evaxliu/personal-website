@@ -1,43 +1,35 @@
+"use client";
+
 import SectionShell from "./SectionShell";
 import ContentCard from "@/app/components/ui/ContentCard";
+import { motion } from "framer-motion";
 
 export default function ExperienceContent() {
   return (
-    <SectionShell
-      title={
-        <>
-          Work <span className="text-purple-300">Experience</span>
-        </>
-      }
-    >
-      <div className="space-y-6">
-        <ContentCard className="p-6">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <p className="font-semibold text-purple-300">
-                Software Engineer &#8594; Lead Software Engineer / Consultant
-              </p>
+    <SectionShell title={<span className="text-purple-300">Experience</span>}>
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.25 }}
+        whileHover={{ y: -3 }}
+      >
+        <ContentCard className="p-5" hover>
+          <div>
+            <p className="font-semibold text-white/95">
+              Center for Reproducible Biomedical Modeling (CRBM)
+            </p>
 
-              <p className="mt-1 text-sm text-white/75">
-                Center for Reproducible Biomedical Modeling (CRBM)
-              </p>
+            <p className="mt-2 text-sm text-purple-200">
+              Software Engineer &#8594; Lead Software Engineer / Consultant
+            </p>
 
-              <p className="mt-1 text-sm text-white/60">
-                July 2022 – December 2024
-              </p>
-            </div>
-
-            <a
-              href="https://reproduciblebiomodels.org/about/#team"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-purple-300/20 bg-purple-300/10 px-3 py-1 text-xs font-medium text-purple-200 transition hover:border-purple-300/40 hover:bg-purple-300/20"
-            >
-              CRBM
-            </a>
+            <p className="mt-1 text-sm text-white/60">
+              July 2022 – December 2024
+            </p>
           </div>
 
-          <ul className="mt-4 list-disc space-y-2 pl-5 text-white/80 leading-relaxed">
+          <ul className="mt-5 list-disc space-y-2 pl-5 text-sm leading-relaxed text-white/80">
             <li>
               Led development of a browser-based computational biology modeling editor,
               improving accessibility and usability of tools for designing and editing
@@ -59,7 +51,7 @@ export default function ExperienceContent() {
             </li>
           </ul>
         </ContentCard>
-      </div>
+      </motion.div>
     </SectionShell>
   );
 }

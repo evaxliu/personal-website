@@ -191,17 +191,37 @@ export default function HomeContent() {
           <span className="text-purple-300">grad school apps</span>, studying{" "}
           <span className="text-purple-300">LeetCode</span>, and personal{" "}
           <span className="text-purple-300">projects</span>.
-          <br />
-          <a
-            href="/EvaLiuResume.pdf"
-            download="EvaLiuResume.pdf"
-            className="text-purple-300 text-sm font-medium underline transition hover:text-purple-200"
-          >
-            Download Resume
-          </a>
         </>
       }
     >
+      <div className="flex flex-wrap justify-center gap-3">
+        <a
+          href="https://github.com/evaxliu"
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-full border border-white/10 bg-[#10101a] px-3 py-1.5 text-sm text-white/75 transition hover:-translate-y-0.5 hover:border-purple-300/30 hover:text-purple-200"
+        >
+          GitHub
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/el02/"
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-full border border-white/10 bg-[#10101a] px-3 py-1.5 text-sm text-white/75 transition hover:-translate-y-0.5 hover:border-purple-300/30 hover:text-purple-200"
+        >
+          LinkedIn
+        </a>
+
+        <a
+          href="/EvaLiuResume.pdf"
+          download
+          className="rounded-full border border-purple-300/30 bg-purple-300/10 px-3 py-1.5 text-sm text-purple-200 transition hover:-translate-y-0.5 hover:bg-purple-300/15"
+        >
+          Resume
+        </a>
+      </div>
+
       <motion.div
         variants={container}
         initial="hidden"
@@ -249,27 +269,20 @@ export default function HomeContent() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 xl:grid-cols-4">
-              <StatCard
-                label="Solved"
-                value={data.stats.totalSolved}
-                valueClassName="text-purple-300"
-              />
-              <StatCard
-                label="Lifetime Active Days"
-                value={data.totalActiveDays}
-                valueClassName="text-emerald-300"
-              />
-              <StatCard
-                label="Current Streak"
-                value={`${data.streak} days`}
-                valueClassName="text-amber-300"
-              />
-              <StatCard
-                label="Best Streak"
-                value={`${longestStreak} days`}
-                valueClassName="text-sky-300"
-              />
+            <div className="flex justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-white/50">Current Streak</span>
+                <span className="font-semibold text-amber-300">
+                  {data.streak} days
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-white/50">Best Streak</span>
+                <span className="font-semibold text-sky-300">
+                  {longestStreak} days
+                </span>
+              </div>
             </div>
 
             <div className="grid min-h-0 grid-cols-1 gap-2 xl:grid-cols-[1.1fr_0.9fr]">
@@ -355,7 +368,7 @@ export default function HomeContent() {
                 <div className="relative min-h-0">
                   <div
                     className={[
-                      "max-h-[32vh] min-h-0 space-y-2 overflow-y-auto pr-1",
+                      "max-h-80 min-h-0 space-y-2 overflow-y-auto pr-2",
                       "[scrollbar-gutter:stable]",
                       "[&::-webkit-scrollbar]:w-1.5",
                       "[&::-webkit-scrollbar-track]:bg-transparent",

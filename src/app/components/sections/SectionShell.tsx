@@ -12,12 +12,9 @@ export default function SectionShell({
   children: ReactNode;
 }) {
   return (
-    <div className="w-full flex items-start justify-center">
-      <div className="w-full max-w-3xl space-y-6 sm:space-y-8">
-        <SectionHeader
-          title={title}
-          description={description}
-        />
+    <div className="flex w-full items-start justify-center">
+      <div className="w-full max-w-3xl space-y-4 sm:space-y-5">
+        <SectionHeader title={title} description={description} />
         {children}
       </div>
     </div>

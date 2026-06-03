@@ -12,9 +12,9 @@ export default function ContentCard({
   return (
     <div
       className={[
-        "rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm",
-        "transition duration-300",
-        hover ? "hover:-translate-y-0.5 hover:bg-white/8" : "",
+        "rounded-3xl border border-white/10 bg-[#10101a]",
+        "transition duration-200",
+        hover ? "hover:-translate-y-0.5 hover:border-purple-300/30" : "",
         className,
       ].join(" ")}
     >
