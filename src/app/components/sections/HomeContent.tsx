@@ -194,7 +194,7 @@ export default function HomeContent() {
         </>
       }
     >
-      <div className="flex flex-wrap justify-center gap-3">
+      <div className="flex flex-wrap justify-center gap-5 pb-5">
         <a
           href="https://github.com/evaxliu"
           target="_blank"
@@ -247,27 +247,19 @@ export default function HomeContent() {
 
         {data && (
           <motion.div variants={item} className="space-y-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <h2 className="text-lg font-semibold md:text-xl">
-                  Live <span className="text-purple-300">LeetCode</span>{" "}
-                  activity
+                  Live <span className="text-purple-300">LeetCode</span> activity
                 </h2>
-                <p className="mt-1 text-xs text-white/50">
-                  {lastUpdated
-                    ? `Last updated at ${lastUpdated}`
-                    : "Not updated yet"}
+
+                <p className="mt-1 text-xs text-white/45">
+                  {lastUpdated ? `Updated ${lastUpdated}` : "Waiting for first update"}
                   {isRefreshing ? " · Refreshing..." : ""}
                 </p>
-                {error && (
-                  <p className="mt-1 text-xs text-red-200/90">
-                    Background refresh failed. Showing last successful data.
-                  </p>
-                )}
               </div>
-            </div>
 
-            <div className="flex justify-center gap-6 text-sm">
+              <div className="flex justify-center gap-6 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-white/50">Current Streak</span>
                 <span className="font-semibold text-amber-300">
@@ -281,6 +273,7 @@ export default function HomeContent() {
                   {longestStreak} days
                 </span>
               </div>
+            </div>
             </div>
 
             <div className="grid min-h-0 grid-cols-1 gap-2 xl:grid-cols-[1.1fr_0.9fr]">
