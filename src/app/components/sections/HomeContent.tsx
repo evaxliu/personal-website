@@ -248,7 +248,7 @@ export default function HomeContent() {
         {data && (
           <motion.div variants={item} className="space-y-4">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
+              <div className="text-center md:text-left">
                 <h2 className="text-lg font-semibold md:text-xl">
                   Live <span className="text-purple-300">LeetCode</span> activity
                 </h2>
@@ -260,20 +260,20 @@ export default function HomeContent() {
               </div>
 
               <div className="flex justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-white/50">Current Streak</span>
-                <span className="font-semibold text-amber-300">
-                  {data.streak} days
-                </span>
-              </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-white/50">Current Streak</span>
+                  <span className="font-semibold text-amber-300">
+                    {data.streak} days
+                  </span>
+                </div>
 
-              <div className="flex items-center gap-2">
-                <span className="text-white/50">Best Streak</span>
-                <span className="font-semibold text-sky-300">
-                  {longestStreak} days
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-white/50">Best Streak</span>
+                  <span className="font-semibold text-sky-300">
+                    {longestStreak} days
+                  </span>
+                </div>
               </div>
-            </div>
             </div>
 
             <div className="grid min-h-0 grid-cols-1 gap-2 xl:grid-cols-[1.1fr_0.9fr]">
