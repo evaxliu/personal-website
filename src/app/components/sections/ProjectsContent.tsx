@@ -19,9 +19,10 @@ export default function ProjectsContent() {
       link: "https://github.com/evaxliu/rice-thoughts",
       date: "July 2025 – Present",
       items: [
-        "Designed and developed a content-driven web platform using Next.js, React, and TypeScript with Wisp CMS for structured content management and dynamic rendering.",
-        "Implemented modular page architecture to support reusable layouts and scalable content organization.",
-        "Built initial system for content delivery and rendering with plans to extend functionality with tag-based filtering and discovery features.",
+        "Built a full-stack blogging platform using Next.js, React, TypeScript, Python, and Supabase with Wisp CMS for structured content management and dynamic rendering.",
+        "Developed an AI-powered article recommendation system using Voyage AI embeddings, pgvector, and semantic search to surface related articles.",
+        "Developed backend services with FastAPI to generate, store, and retrieve vector embeddings for content discovery workflows.",
+        "Implemented modular frontend architecture to support reusable layouts and scalable content delivery."
       ],
     },
     {
