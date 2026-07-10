@@ -1,17 +1,21 @@
-import Marquee from "./components/Marquee/Marquee";
-import { marqueeList } from "./components/Marquee/Marquee-text";
-import Landing from "./components/website-sections/Landing";
+import Landing from "./website-sections/Landing";
+import Experience from "./website-sections/Experience";
+import Footer from "./components/Footer";
 
 export default function Page() {
   return (
     <>
-      <div className="min-h-screen flex justify-center items-center flex-col">
+      <div className="flex justify-center items-center flex-col">
         <Landing />
-        <Marquee texts={marqueeList} />
+        {/* <Marquee texts={marqueeList} /> */}
       </div>
-      <div className="min-h-screen flex justify-center items-center flex-col">
-        <Landing />
-        <Marquee texts={marqueeList} />
+
+      <div className="flex items-center flex-col gap-10">
+        <Experience />
+      </div>
+
+      <div className="flex items-center flex-col">
+        <Footer />
       </div>
     </>
   );
