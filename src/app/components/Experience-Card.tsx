@@ -17,7 +17,7 @@ export default function ExperienceCard({company, role, date, descriptions, accen
       : "border-l-green-300 text-green-300"
 
   return(
-    <section className={`flex flex-col gap-3 px-7 py-5 grow w-full bg-[#1F1838] rounded-2xl border border-[#322851] border-l-4 hover:translate-x-1 duration-300 ease-in-out ${accentClass}`}>
+    <section className={`flex flex-col gap-3 px-7 py-5 grow w-full bg-[#1F1838] rounded-2xl border border-[#322851] border-l-4 hover:-translate-y-1 duration-300 ease-in-out ${accentClass}`}>
       <div className='flex justify-between flex-col gap-3 md:flex-row'>
         <h2 className="text-md text-white font-bold">
           {company}

@@ -10,8 +10,8 @@ export default function Experience() {
   ]
 
   const FreelanceProjects = [
-    ["ZV Homeconstruction LLC", "Visit site ↗", "https://zv-homeconstruction-website.vercel.app/"],
-    ["Rice Thoughts Blog", "Visit site ↗", "https://ricethoughts.com/"]
+    ["ZV Homeconstruction LLC", "In Progress", "https://link-to-nowhere"],
+    ["Rice Thoughts Blog", "In Progress", "https://ricethoughts.com/"]
   ]
 
   const sideProjects = [
@@ -20,7 +20,7 @@ export default function Experience() {
   ]
 
   return(
-    <section className="flex flex-col gap-7 w-full max-w-3xl p-10 md:px-10 md:py-0">
+    <section className="flex flex-col gap-7 w-full max-w-3xl px-10">
       <SectionHeader label={"FOR ENGINEERING TEAMS"} color={"violet"} id={"engineering"} />
 
       <ExperienceCard 
@@ -60,13 +60,13 @@ export default function Experience() {
       <FreelanceServices />
 
       <ExperienceCard 
-        company={"ZV Homeconstruction LLC — Marketing Website"}
-        role={"Freelance Web Developer"}
+        company={"Independent Contractor"}
+        role={"Freelance Web/Software Developer"}
         date={"2025 — Present"}
         descriptions={[
-          "Building a marketing website for a construction company to improve its online presence, communicate services clearly, and support prospective client inquiries.",
-          "Translating business needs into a polished web experience — site structure, responsive UI implementation, and content organization.",
-          "Owning deployment plus SEO and performance considerations so each site is fast, discoverable, and easy to maintain."
+          "Building websites and web applications for clients based on their business goals and project needs.",
+          "Taking projects from initial planning through development, launch, and ongoing improvements.",
+          "Managing deployment, performance, SEO, and ongoing maintainability across each project."
         ]}
         techStack={[
           "Next.js / React",

@@ -7,7 +7,6 @@ export default function Page() {
     <>
       <div className="flex justify-center items-center flex-col">
         <Landing />
-        {/* <Marquee texts={marqueeList} /> */}
       </div>
 
       <div className="flex items-center flex-col gap-10">

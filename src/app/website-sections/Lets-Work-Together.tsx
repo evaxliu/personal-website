@@ -4,17 +4,17 @@ import GetInTouch from "../components/Get-In-Touch";
 
 export default function LetsWorkTogether() {
   return(
-    <section className="border border-[#322851] bg-[#1F1838] rounded-2xl py-10 px-20">
+    <section className="border border-[#322851] bg-[#1F1838] rounded-2xl py-5 px-8 md:py-10 md:px-20">
       <div className="flex flex-col items-center gap-5">
-        <h2 className="text-3xl text-white font-bold text-left md:text-center">
+        <h2 className="text-3xl text-white font-bold text-center">
           Let&apos;s work together
         </h2>
         
-        <p className="text-violet-200 font-semibold text-left md:text-center">
+        <p className="text-violet-200 font-semibold text-center">
           Open to software engineering roles and freelance web projects. Whether you&apos;re hiring or need a site built, I&apos;d love to hear from you.
         </p>
 
-        <div className="flex gap-3 text-sm flex-wrap">
+        <div className="flex gap-3 text-sm flex-wrap justify-center">
           <GetInTouch />
 
           <Link 

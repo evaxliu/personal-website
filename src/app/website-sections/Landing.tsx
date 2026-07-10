@@ -34,13 +34,13 @@ export default function Landing() {
         </h1>
       </div>
 
-      <div className="flex flex-col gap-7 max-w-2xl">
+      <div className="flex flex-col gap-5 max-w-2xl">
         <p className="text-xl text-white font-bold">
-          Software engineer building <span className="text-violet-300">polished</span>, responsive web experiences.
+          Software Engineer building reliable, user-friendly software for teams, businesses, and clients.
         </p>
 
         <p className="text-md leading-8 text-violet-200 font-semibold">
-          I’m a CS grad from the University of Washington’s Allen School with experience building shipped software products from planning through launch. My work includes research tools used by scientists and presented at international conferences, and I now also build responsive websites for businesses as a freelance developer.
+          I’m a CS grad from the University of Washington’s Allen School with experience building shipped software products from planning through launch. My work includes research tools used by scientists and presented at international conferences, and I also build responsive websites for businesses as a freelance developer.
         </p>
       </div>
 
