@@ -1,6 +1,5 @@
-import { ArrowRight } from "lucide-react";
 import ServicesCard from "./Services-Card";
-import Link from "next/link";
+import StartAProject from "./Start-A-Project";
 
 export default function FreelanceServices() {
   return(
@@ -22,9 +21,7 @@ export default function FreelanceServices() {
       </div>
 
       <div className="flex items-center gap-3 text-sm">
-        <Link className="flex h-12 items-center justify-center border border-[#8fd9b6] bg-[#8fd9b6] text-black py-2.5 px-5 rounded-xl font-bold hover:-translate-y-1 duration-300 ease-in-out" href={"mailto:evaxliu02@gmail.com"}>
-          Start a project <ArrowRight />
-        </Link>
+        <StartAProject />
         
         <p className="text-[#8F82B0]">
           Free intro chat — tell me what your business needs.

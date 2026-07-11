@@ -1,10 +1,19 @@
+"use client"
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 export default function GetInTouch(){
+  const scrollToSection = () => {
+    document
+      .getElementById("contact")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return(
-    <Link className="flex items-center justify-center h-12 border bg-violet-200 text-[#171129] py-2.5 px-5 rounded-xl font-bold hover:-translate-y-1 duration-300 ease-in-out" href={"mailto:evaxliu02@gmail.com"}>
+    <button 
+      className="flex items-center justify-center h-12 border bg-violet-200 text-[#171129] py-2.5 px-5 rounded-xl font-bold hover:-translate-y-1 duration-300 ease-in-out" 
+      onClick={scrollToSection}
+    >
       Get In Touch <ArrowRight />
-    </Link>
+    </button>
   )
 }

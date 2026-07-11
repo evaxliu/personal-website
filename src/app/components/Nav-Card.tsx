@@ -10,7 +10,7 @@ type cardProps = {
 }
 
 export default function NavCard({title, description, link, url, accentColor} : cardProps) {
-    const scrollToContact = () => {
+    const scrollToSection = () => {
       document
         .getElementById(url)
         ?.scrollIntoView({ behavior: "smooth" });
@@ -24,7 +24,7 @@ export default function NavCard({title, description, link, url, accentColor} : c
   return(
     <div 
       className={`flex flex-col px-7 py-5 gap-3 grow w-full bg-[#1F1838] rounded-2xl border border-[#322851] ${accentClass} border-l-4 hover:-translate-y-1 duration-300 ease-in-out`}
-      onClick={scrollToContact}
+      onClick={scrollToSection}
     >
       <section className="flex flex-col gap-3">
         <h2 className="text-md text-white font-bold">
