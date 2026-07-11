@@ -16,7 +16,11 @@ export default function ContactForm() {
     });
 
     const data = await response.json();
-    setResult(data.success ? "Success!" : "Error");
+    setResult(
+      data.success
+        ? "Thanks for reaching out! I’ll review your message and get back to you within 1–2 business days."
+        : "Something went wrong while sending your message. Please try again in a moment."
+    );
   };
 
   return (
@@ -26,7 +30,24 @@ export default function ContactForm() {
         <input type="email" name="email" required placeholder="Email" className="flex border border-[#322851] bg-[#1F1838] rounded-2xl p-3 shrink w-full" />
       </div>
       <div className="flex flex-col gap-3">
-        <textarea name="message" required placeholder="Type your message here." className="flex border border-[#322851] bg-[#1F1838] rounded-2xl w-full p-3 shrink" ></textarea>
+        <div className="h-40 w-full overflow-hidden rounded-2xl border border-[#322851] bg-[#1F1838]">
+          <textarea
+            className="
+              h-full w-full resize-none overflow-y-auto overscroll-y-contain
+              bg-transparent p-3 outline-none
+
+              [scrollbar-color:auto]
+
+              [&::-webkit-scrollbar]:w-2
+              [&::-webkit-scrollbar-track]:bg-transparent
+              [&::-webkit-scrollbar-thumb]:rounded-full
+              [&::-webkit-scrollbar-thumb]:bg-violet-300
+
+              [&::-webkit-scrollbar-button]:hidden
+              [&::-webkit-scrollbar-button]:size-0
+            "
+          />
+        </div>
         <button type="submit" className="flex items-center justify-center h-12 border bg-violet-200 text-[#171129] py-2.5 px-5 rounded-xl font-bold hover:cursor-pointer">Submit</button>
         <p>{result}</p>
       </div>
