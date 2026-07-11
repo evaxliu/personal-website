@@ -32,6 +32,9 @@ export default function ContactForm() {
       <div className="flex flex-col gap-3">
         <div className="h-40 w-full overflow-hidden rounded-2xl border border-[#322851] bg-[#1F1838]">
           <textarea
+            name="message"
+            required
+            placeholder="Type your message here."
             className="
               h-full w-full resize-none overflow-y-auto overscroll-y-contain
               bg-transparent p-3 outline-none
