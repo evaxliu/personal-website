@@ -18,20 +18,26 @@ export default function ProjectCard({title, projLinkTitle, projectLink, codeLink
       </h3>
       
       <div className="flex gap-3 text-sm">
-        {projectLink && (
+        {projectLink ? (
           <Link
-            className="text-xs font-semibold font-plex-sans"
+            className="text-xs font-semibold font-plex-sans select-none"
             href={projectLink}
             rel="noopener noreferrer"
             target="_blank"
           >
             {projLinkTitle}
           </Link>
+        ) : (
+          projLinkTitle && (
+            <span className="text-xs font-semibold font-plex-sans cursor-default select-none">
+              {projLinkTitle}
+            </span>
+          )
         )}
 
         {codeLink && (
           <Link
-            className="text-xs font-semibold font-plex-sans text-pink-300"
+            className="text-xs font-semibold font-plex-sans text-pink-300 select-none"
             href={codeLink}
             rel="noopener noreferrer"
             target="_blank"

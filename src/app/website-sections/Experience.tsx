@@ -10,7 +10,7 @@ export default function Experience() {
   ]
 
   const FreelanceProjects = [
-    ["ZV Homeconstruction LLC", "In Progress", "https://link-to-nowhere"],
+    ["ZV Homeconstruction LLC", "In Progress", ""],
     ["Rice Thoughts Blog", "In Progress", "https://ricethoughts.com/"]
   ]
 
