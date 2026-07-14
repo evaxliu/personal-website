@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "Eva Liu",
     images: [
       {
-        url: "/purple-star.png",
+        url: "/opengraph.webp",
         width: 1200,
         height: 630,
         alt: "Eva Liu: Software Engineer and Freelance Web Developer",

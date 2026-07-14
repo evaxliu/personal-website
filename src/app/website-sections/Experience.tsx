@@ -5,19 +5,61 @@ import LetsWorkTogether from "./Lets-Work-Together";
 
 export default function Experience() {
   const CRBMProjects = [
-    ["VSCode-Antimony Extension", "Project page ↗", "https://reproduciblebiomodels.org/vscode-antimony/", "https://github.com/sys-bio/vscode-antimony"],
-    ["Antimony Web Editor", "Live editor ↗", "https://sys-bio.github.io/AntimonyEditor/", "https://github.com/sys-bio/AntimonyEditor"]
-  ]
+    [
+      "VSCode-Antimony Extension",
+      "Project page ↗",
+      "https://reproduciblebiomodels.org/vscode-antimony/",
+      "https://github.com/sys-bio/vscode-antimony",
+      "/projects/vscode-antimony.webp",
+      "VSCode-Antimony extension interface for working with Antimony models",
+    ],
+    [
+      "Antimony Web Editor",
+      "Live editor ↗",
+      "https://sys-bio.github.io/AntimonyEditor/",
+      "https://github.com/sys-bio/AntimonyEditor",
+      "/projects/antimony-web-editor.webp",
+      "Antimony Web Editor interface for creating computational biology models",
+    ],
+  ];
 
   const FreelanceProjects = [
-    ["ZV Homeconstruction LLC", "In Progress", ""],
-    ["Rice Thoughts Blog", "In Progress", "https://ricethoughts.com/"]
-  ]
+    [
+      "ZV Homeconstruction LLC",
+      "In Progress",
+      "",
+      "",
+      "/projects/in-progress.webp",
+      "ZV Homeconstruction company website preview",
+    ],
+    [
+      "Rice Thoughts Blog",
+      "Live website ↗",
+      "https://ricethoughts.com/",
+      "",
+      "/projects/rice-thoughts.webp",
+      "Rice Thoughts blog homepage and article layout",
+    ],
+  ];
 
   const sideProjects = [
-    ["Pet My Dog", "", "", "https://github.com/evaxliu/pet-my-dog"],
-    ["This Website!", "", "", "https://github.com/evaxliu/personal-website"]
-  ]
+    [
+      "Pet My Dog",
+      "",
+      "",
+      "https://github.com/evaxliu/pet-my-dog",
+      "/projects/pet-my-dog-webapp.webp",
+      "Pet My Dog web application interface",
+    ],
+    [
+      "This Website!",
+      "Live website ↗",
+      "https://www.lilacplanet.dev/",
+      "https://github.com/evaxliu/personal-website",
+      "/projects/personal-website.webp",
+      "Eva Liu software engineering portfolio homepage",
+    ],
+  ];
 
   return(
     <section className="flex flex-col gap-7 w-full max-w-3xl px-10">
