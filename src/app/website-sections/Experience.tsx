@@ -7,8 +7,8 @@ export default function Experience() {
   const CRBMProjects = [
     [
       "VSCode-Antimony Extension",
-      "Project page ↗",
-      "https://reproduciblebiomodels.org/vscode-antimony/",
+      "VSCode-Antimony Bioinformatics publication ↗",
+      "https://academic.oup.com/bioinformatics/article/39/12/btad753/7473373",
       "https://github.com/sys-bio/vscode-antimony",
       "/projects/vscode-antimony.webp",
       "VSCode-Antimony extension interface for working with Antimony models",
@@ -34,7 +34,7 @@ export default function Experience() {
     ],
     [
       "Rice Thoughts Blog",
-      "Live website ↗",
+      "In Progress",
       "https://ricethoughts.com/",
       "",
       "/projects/rice-thoughts.webp",
@@ -74,7 +74,7 @@ export default function Experience() {
           "Owned end-to-end execution — roadmap, sprint planning, and delivery — translating research requirements into scalable features.",
           "Mentored contributors and coordinated across a distributed research team to keep tooling reliable and maintainable.",
           "Presented research software tools at international conferences (COMBINE, HARMONY) on standards and interoperability.",
-          "Co-authored a peer-reviewed Bioinformatics publication on a VSCode extension for Antimony."
+          "Co-authored a peer-reviewed Oxford Bioinformatics publication on a VSCode extension for Antimony."
         ]}
         techStack={[
           "React",
