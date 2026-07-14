@@ -1,25 +1,21 @@
 # Eva Liu — Personal Website
 
-My personal portfolio website for showcasing my software engineering experience, projects, and freelance web development services.
+My portfolio website for software engineering opportunities and freelance web development work.
 
 **Live site:** [lilacplanet.dev](https://www.lilacplanet.dev)
 
-## About
+## Overview
 
-The website provides an overview of my background as a University of Washington Computer Science graduate and former Lead Software Engineer at the Center for Reproducible Biomedical Modeling.
+I built this site to give hiring teams and potential clients one place to understand my experience, view my work, and contact me. It highlights my software engineering background, research software projects, independent projects, and freelance web development services.
 
-It also highlights my freelance services, professional experience, research software projects, and other work.
+## Highlights
 
-## Features
-
-* Responsive design for desktop and mobile devices
-* Professional experience and education sections
-* Freelance web development services
-* Project links and live demos
-* Resume, GitHub, and LinkedIn links
-* Smooth section navigation
-* SEO and Open Graph metadata
-* Vercel Analytics integration
+* Responsive single-page layout for desktop and mobile
+* Dedicated paths for software engineering experience and freelance services
+* Reusable components for experience, projects, service information, navigation, and contact
+* Direct links to source code, live projects, my resume, GitHub, and LinkedIn
+* Contact form powered by Web3Forms
+* SEO and Open Graph metadata with Vercel Analytics
 
 ## Built With
 
@@ -28,20 +24,21 @@ It also highlights my freelance services, professional experience, research soft
 * [TypeScript](https://www.typescriptlang.org/)
 * [Tailwind CSS](https://tailwindcss.com/)
 * [Lucide React](https://lucide.dev/)
+* [Web3Forms](https://web3forms.com/)
 * [Vercel Analytics](https://vercel.com/analytics)
 
 ## Project Structure
 
 ```text
 personal-website/
-├── public/                  # Images, resume, and other static files
+├── public/                     # Images, resume, and static assets
 ├── src/
 │   └── app/
-│       ├── components/      # Reusable UI components
-│       ├── website-sections/# Main website sections
-│       ├── globals.css      # Global styles and Tailwind configuration
-│       ├── layout.tsx       # Root layout and site metadata
-│       └── page.tsx         # Main page
+│       ├── components/         # Reusable UI components
+│       ├── website-sections/   # Main page sections
+│       ├── globals.css         # Global styles and Tailwind configuration
+│       ├── layout.tsx          # Root layout, metadata, and analytics
+│       └── page.tsx            # Main page composition
 ├── package.json
 └── tsconfig.json
 ```
@@ -55,7 +52,7 @@ git clone https://github.com/evaxliu/personal-website.git
 cd personal-website
 ```
 
-Install the dependencies:
+Install dependencies:
 
 ```bash
 npm install
@@ -71,32 +68,13 @@ Open http://localhost:3000 in your browser.
 
 ## Available Scripts
 
-```bash
-npm run dev
-```
-
-Runs the website in development mode.
-
-```bash
-npm run build
-```
-
-Creates an optimized production build.
-
-```bash
-npm run start
-```
-
-Runs the production build locally.
-
-```bash
-npm run lint
-```
-
-Checks the project for linting issues.
+* `npm run dev` — starts the development server
+* `npm run build` — creates a production build
+* `npm run start` — runs the production build
+* `npm run lint` — checks the project for linting issues
 
 ## Contact
 
+* [Portfolio](https://www.lilacplanet.dev)
 * [LinkedIn](https://www.linkedin.com/in/el02/)
 * [GitHub](https://github.com/evaxliu)
-* [Portfolio](https://www.lilacplanet.dev)

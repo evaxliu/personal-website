@@ -6,19 +6,55 @@ import LetsWorkTogether from "./Lets-Work-Together";
 
 export default function Experience() {
   const CRBMProjects = [
-    ["VSCode-Antimony Extension", "Project page ↗", "https://reproduciblebiomodels.org/vscode-antimony/", "https://github.com/sys-bio/vscode-antimony"],
-    ["Antimony Web Editor", "Live editor ↗", "https://sys-bio.github.io/AntimonyEditor/", "https://github.com/sys-bio/AntimonyEditor"]
-  ]
+    [
+      "VSCode-Antimony Extension",
+      "Oxford Software publication ↗",
+      "https://academic.oup.com/bioinformatics/article/39/12/btad753/7473373",
+      "https://github.com/sys-bio/vscode-antimony",
+      "VSCode-Antimony extension interface for working with Antimony models",
+    ],
+    [
+      "Antimony Web Editor",
+      "Live editor ↗",
+      "https://sys-bio.github.io/AntimonyEditor/",
+      "https://github.com/sys-bio/AntimonyEditor",
+      "Antimony Web Editor interface for creating computational biology models",
+    ],
+  ];
 
   const FreelanceProjects = [
-    ["ZV Homeconstruction LLC", "In Progress", "https://link-to-nowhere"],
-    ["Rice Thoughts Blog", "In Progress", "https://ricethoughts.com/"]
-  ]
+    [
+      "ZV Homeconstruction LLC",
+      "In Progress",
+      "",
+      "",
+      "ZV Homeconstruction company website preview",
+    ],
+    [
+      "Rice Thoughts Blog",
+      "In Progress",
+      "https://ricethoughts.com/",
+      "",
+      "Rice Thoughts blog homepage and article layout",
+    ],
+  ];
 
   const sideProjects = [
-    ["Pet My Dog", "", "", "https://github.com/evaxliu/pet-my-dog"],
-    ["This Website!", "", "", "https://github.com/evaxliu/personal-website"]
-  ]
+    [
+      "Pet My Dog",
+      "",
+      "",
+      "https://github.com/evaxliu/pet-my-dog",
+      "Pet My Dog web application interface",
+    ],
+    [
+      "This Website!",
+      "Live website ↗",
+      "https://www.lilacplanet.dev/",
+      "https://github.com/evaxliu/personal-website",
+      "Eva Liu software engineering portfolio homepage",
+    ],
+  ];
 
   return(
     <section className="flex flex-col gap-7 w-full max-w-3xl px-10">
@@ -33,7 +69,7 @@ export default function Experience() {
           "Owned end-to-end execution — roadmap, sprint planning, and delivery — translating research requirements into scalable features.",
           "Mentored contributors and coordinated across a distributed research team to keep tooling reliable and maintainable.",
           "Presented research software tools at international conferences (COMBINE, HARMONY) on standards and interoperability.",
-          "Co-authored a peer-reviewed Bioinformatics publication on a VSCode extension for Antimony."
+          "Co-authored a peer-reviewed Oxford Bioinformatics publication on a VSCode extension for Antimony."
         ]}
         techStack={[
           "React",
