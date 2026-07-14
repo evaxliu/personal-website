@@ -10,7 +10,6 @@ export default function Experience() {
       "Oxford Software publication ↗",
       "https://academic.oup.com/bioinformatics/article/39/12/btad753/7473373",
       "https://github.com/sys-bio/vscode-antimony",
-      "/projects/vscode-antimony.webp",
       "VSCode-Antimony extension interface for working with Antimony models",
     ],
     [
@@ -18,7 +17,6 @@ export default function Experience() {
       "Live editor ↗",
       "https://sys-bio.github.io/AntimonyEditor/",
       "https://github.com/sys-bio/AntimonyEditor",
-      "/projects/antimony-web-editor.webp",
       "Antimony Web Editor interface for creating computational biology models",
     ],
   ];
@@ -29,7 +27,6 @@ export default function Experience() {
       "In Progress",
       "",
       "",
-      "/projects/in-progress.webp",
       "ZV Homeconstruction company website preview",
     ],
     [
@@ -37,7 +34,6 @@ export default function Experience() {
       "In Progress",
       "https://ricethoughts.com/",
       "",
-      "/projects/rice-thoughts.webp",
       "Rice Thoughts blog homepage and article layout",
     ],
   ];
@@ -48,7 +44,6 @@ export default function Experience() {
       "",
       "",
       "https://github.com/evaxliu/pet-my-dog",
-      "/projects/pet-my-dog-webapp.webp",
       "Pet My Dog web application interface",
     ],
     [
@@ -56,7 +51,6 @@ export default function Experience() {
       "Live website ↗",
       "https://www.lilacplanet.dev/",
       "https://github.com/evaxliu/personal-website",
-      "/projects/personal-website.webp",
       "Eva Liu software engineering portfolio homepage",
     ],
   ];

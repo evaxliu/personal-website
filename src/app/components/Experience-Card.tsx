@@ -58,7 +58,7 @@ export default function ExperienceCard({company, role, date, descriptions, accen
             projLinkTitle={project[1]}
             projectLink={project[2]}
             codeLink={project[3]}
-            imageSrc={project[4]}
+            // imageSrc={project[4]}
             imageAlt={project[5]}
           />
         ))}

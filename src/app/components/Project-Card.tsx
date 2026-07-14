@@ -6,15 +6,15 @@ type projectProps = {
   projLinkTitle?: string,
   projectLink?: string,
   codeLink?: string,
-  imageSrc: string,
+  // imageSrc: string,
   imageAlt: string
 }
 
-export default function ProjectCard({title, projLinkTitle, projectLink, codeLink, imageSrc, imageAlt}: projectProps) {
+export default function ProjectCard({title, projLinkTitle, projectLink, codeLink, imageAlt}: projectProps) {
 
   return(
     <div className='grid px-5 py-5 gap-3 w-full bg-[#171129] rounded-2xl border border-[#322851]'>
-      <div className="relative aspect-16/10 w-full overflow-hidden border-b border-[#322851]">
+      {/* <div className="relative aspect-16/10 w-full overflow-hidden border-b border-[#322851]">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -22,7 +22,7 @@ export default function ProjectCard({title, projLinkTitle, projectLink, codeLink
           sizes="(min-width: 768px) 350px, 100vw"
           className="object-cover object-top"
         />
-      </div>
+      </div> */}
 
       <h3 className="text-sm text-white font-bold">
         {title}
