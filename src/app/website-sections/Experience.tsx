@@ -7,7 +7,7 @@ export default function Experience() {
   const CRBMProjects = [
     [
       "VSCode-Antimony Extension",
-      "VSCode-Antimony Bioinformatics publication ↗",
+      "Oxford Software publication ↗",
       "https://academic.oup.com/bioinformatics/article/39/12/btad753/7473373",
       "https://github.com/sys-bio/vscode-antimony",
       "/projects/vscode-antimony.webp",
