@@ -1,7 +1,11 @@
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const LEETCODE_URL = "https://leetcode.com/graphql/";
-const RECENT_SUBMISSION_LIMIT = 20;
+const RECENT_SUBMISSION_FETCH_LIMIT = 100;
+const RECENT_SUBMISSION_DISPLAY_LIMIT = 20;
+const TIME_ZONE = "America/Los_Angeles";
 
 type Difficulty = "Easy" | "Medium" | "Hard";
 type Calendar = Record<string, number>;
@@ -9,6 +13,13 @@ type Calendar = Record<string, number>;
 type SubmissionStat = {
   difficulty: "All" | Difficulty;
   count: number;
+};
+
+type RecentSubmission = {
+  title: string;
+  titleSlug: string;
+  timestamp: number;
+  status: string;
 };
 
 type GraphQLResult<T> = {
@@ -117,11 +128,11 @@ async function queryLeetCode<T>(
     signal: AbortSignal.timeout(10_000),
   });
 
-  const result = (await response.json()) as GraphQLResult<T>;
-
   if (!response.ok) {
     throw new Error(`LeetCode returned HTTP ${response.status}.`);
   }
+
+  const result = (await response.json()) as GraphQLResult<T>;
 
   if (result.errors?.length) {
     throw new Error(
@@ -138,6 +149,23 @@ async function queryLeetCode<T>(
 
 function getDateKey(date: Date) {
   return date.toISOString().slice(0, 10);
+}
+
+function getSubmissionDateKey(timestamp: number) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: TIME_ZONE,
+  }).formatToParts(new Date(timestamp * 1000));
+
+  const values = Object.fromEntries(
+    parts
+      .filter(({ type }) => type !== "literal")
+      .map(({ type, value }) => [type, value]),
+  );
+
+  return `${values.year}-${values.month}-${values.day}`;
 }
 
 function addDays(date: Date, amount: number) {
@@ -273,6 +301,68 @@ function getSolvedCounts(
   return solved;
 }
 
+function selectRecentSubmissions(
+  submissions: RecentSubmission[],
+) {
+  const submissionsByProblem = new Map<
+    string,
+    RecentSubmission[]
+  >();
+
+  for (const submission of submissions) {
+    const problemSubmissions =
+      submissionsByProblem.get(submission.titleSlug) ?? [];
+
+    problemSubmissions.push(submission);
+    submissionsByProblem.set(
+      submission.titleSlug,
+      problemSubmissions,
+    );
+  }
+
+  const selectedSubmissions: RecentSubmission[] = [];
+
+  for (const problemSubmissions of submissionsByProblem.values()) {
+    const newestFirst = [...problemSubmissions].sort(
+      (first, second) =>
+        second.timestamp - first.timestamp,
+    );
+
+    const mostRecentDay = getSubmissionDateKey(
+      newestFirst[0].timestamp,
+    );
+
+    const submissionsOnMostRecentDay = newestFirst.filter(
+      ({ timestamp }) =>
+        getSubmissionDateKey(timestamp) === mostRecentDay,
+    );
+
+    const firstAccepted = submissionsOnMostRecentDay
+      .filter(({ status }) => status === "Accepted")
+      .sort(
+        (first, second) =>
+          first.timestamp - second.timestamp,
+      )[0];
+
+    const lastWrong = submissionsOnMostRecentDay.find(
+      ({ status }) => status !== "Accepted",
+    );
+
+    const selectedSubmission = firstAccepted ?? lastWrong;
+
+    if (selectedSubmission) {
+      selectedSubmissions.push(selectedSubmission);
+    }
+  }
+
+  return selectedSubmissions
+    .sort(
+      (first, second) =>
+        second.timestamp - first.timestamp,
+    )
+    .slice(0, RECENT_SUBMISSION_DISPLAY_LIMIT);
+}
+
 export async function GET() {
   let profileUrl: string | undefined;
 
@@ -296,7 +386,7 @@ export async function GET() {
       {
         username,
         year: currentYear,
-        limit: RECENT_SUBMISSION_LIMIT,
+        limit: RECENT_SUBMISSION_FETCH_LIMIT,
       },
     );
 
@@ -337,18 +427,18 @@ export async function GET() {
     const { currentStreak, bestStreak } =
       calculateStreaks(calendar);
 
-    const recentSubmissions = (
-      stats.recentSubmissionList ?? []
-    )
-      .map((submission) => ({
-        title: submission.title,
-        titleSlug: submission.titleSlug,
-        timestamp: Number(submission.timestamp),
-        status: submission.statusDisplay,
-      }))
-      .filter(({ timestamp }) =>
-        Number.isFinite(timestamp),
-      );
+    const recentSubmissions = selectRecentSubmissions(
+      (stats.recentSubmissionList ?? [])
+        .map((submission) => ({
+          title: submission.title,
+          titleSlug: submission.titleSlug,
+          timestamp: Number(submission.timestamp),
+          status: submission.statusDisplay,
+        }))
+        .filter(({ timestamp }) =>
+          Number.isFinite(timestamp),
+        ),
+    );
 
     return Response.json(
       {
@@ -369,8 +459,9 @@ export async function GET() {
       },
       {
         headers: {
-          "Cache-Control":
-            "public, s-maxage=1800, stale-while-revalidate=86400",
+          "Cache-Control": "no-store, max-age=0",
+          "CDN-Cache-Control": "no-store",
+          "Vercel-CDN-Cache-Control": "no-store",
         },
       },
     );
@@ -390,7 +481,9 @@ export async function GET() {
       {
         status: 502,
         headers: {
-          "Cache-Control": "no-store",
+          "Cache-Control": "no-store, max-age=0",
+          "CDN-Cache-Control": "no-store",
+          "Vercel-CDN-Cache-Control": "no-store",
         },
       },
     );

@@ -96,7 +96,7 @@ function formatSubmissionDate(timestamp: number) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
-    timeZone: "UTC",
+    timeZone: TIME_ZONE,
   }).format(new Date(timestamp * 1000));
 }
 
@@ -318,8 +318,14 @@ export default function LeetCodeStats() {
     const controller = new AbortController();
 
     async function loadStats() {
+      setState({});
+
       try {
         const response = await fetch("/api/leetcode", {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
           signal: controller.signal,
         });
 
@@ -451,9 +457,9 @@ export default function LeetCodeStats() {
                 "
               >
                 {stats.recentSubmissions.map(
-                  (submission, index) => (
+                  (submission) => (
                     <SubmissionRow
-                      key={`${submission.timestamp}-${submission.titleSlug}-${index}`}
+                      key={submission.titleSlug}
                       submission={submission}
                     />
                   ),
