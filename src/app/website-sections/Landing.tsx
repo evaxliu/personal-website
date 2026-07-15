@@ -1,12 +1,12 @@
-import Image from "next/image";
 import NavCard from "../components/Nav-Card";
 import GetInTouch from "../components/Get-In-Touch";
 import SocialButton from "../components/Social-Button";
+import Surprise from "./Surprise";
 
 const links = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/el02/" },
   { name: "GitHub", href: "https://github.com/evaxliu" },
-  { name: "Resume", href: "EvaLiuResume.pdf" }
+  { name: "Resume", href: "/EvaLiuResume.pdf" }
 ]
 
 export default function Landing() {
@@ -20,14 +20,7 @@ export default function Landing() {
       </p>
 
       <div className="flex gap-3">
-        {/* Add Icon Here Later */}
-        <Image 
-          key="LandingIcon"
-          src={"/purple-star.png"}
-          width={50}
-          height={50} alt={"icon of purple star"}   
-          className="animate-bounce"     
-        />
+        <Surprise />
 
         <p className="text-5xl text-white font-bold">
           Eva Liu

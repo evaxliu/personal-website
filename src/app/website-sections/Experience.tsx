@@ -115,8 +115,6 @@ export default function Experience() {
       />
 
       <LetsWorkTogether />
-
-      {/* <SectionHeader label={"FUN / SHOWCASE"} color={"violet"} /> */}
     </section>
   );
 }
