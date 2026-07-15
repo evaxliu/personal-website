@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "Eva Liu",
     images: [
       {
-        url: "/open-graph.png",
+        url: "/open-graph-image.png",
         width: 1200,
         height: 630,
         alt: "Eva Liu: Software Engineer and Freelance Web Developer",
