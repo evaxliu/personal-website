@@ -1,6 +1,5 @@
 import ExperienceCard from "../components/Experience-Card";
 import FreelanceServices from "../components/Freelance-Services";
-import LeetCodeStats from "../components/Leetcode-Stats";
 import SectionHeader from "../components/Section-Header";
 import LetsWorkTogether from "./Lets-Work-Together";
 
@@ -116,9 +115,6 @@ export default function Experience() {
       />
 
       <LetsWorkTogether />
-
-      <SectionHeader label={"FUN / SHOWCASE"} color={"violet"} />
-      <LeetCodeStats />
     </section>
   );
 }

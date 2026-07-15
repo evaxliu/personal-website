@@ -1,7 +1,8 @@
-import Image from "next/image";
 import NavCard from "../components/Nav-Card";
 import GetInTouch from "../components/Get-In-Touch";
 import SocialButton from "../components/Social-Button";
+import Surprise from "./Surprise";
+import LeetCodeStats from "../components/Leetcode-Stats";
 
 const links = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/el02/" },
@@ -20,14 +21,9 @@ export default function Landing() {
       </p>
 
       <div className="flex gap-3">
-        {/* Add Icon Here Later */}
-        <Image 
-          key="LandingIcon"
-          src={"/purple-star.png"}
-          width={50}
-          height={50} alt={"icon of purple star"}   
-          className="animate-bounce"     
-        />
+        <Surprise>
+          <LeetCodeStats />
+        </Surprise>
 
         <p className="text-5xl text-white font-bold">
           Eva Liu
