@@ -9,7 +9,7 @@ export default function LetsWorkTogether() {
         </h2>
         
         <p className="text-violet-200 font-semibold md:text-center text-left">
-          Open to software engineering roles and freelance web projects. Whether you&apos;re hiring or need a site built, I&apos;d love to hear from you.
+          Hiring or need a site built? I&apos;d love to hear from you.
         </p>
 
         <ContactForm />

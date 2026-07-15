@@ -30,7 +30,7 @@ export default function ExperienceCard({company, role, date, descriptions, accen
         }
       </div>
 
-      <p className="text-sm font-semibold">
+      <p className="text-sm font-semibold text-[#E8A3CF]">
         {role}
       </p>
 

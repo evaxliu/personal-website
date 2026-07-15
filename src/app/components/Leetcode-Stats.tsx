@@ -316,9 +316,14 @@ export default function LeetCodeStats() {
 
   useEffect(() => {
     const controller = new AbortController();
+    let requestInProgress = false;
 
     async function loadStats() {
-      setState({});
+      if (requestInProgress) {
+        return;
+      }
+
+      requestInProgress = true;
 
       try {
         const response = await fetch("/api/leetcode", {
@@ -332,14 +337,21 @@ export default function LeetCodeStats() {
         const result = (await response.json()) as ApiResponse;
 
         if (!response.ok || !result.ok) {
-          setState({
-            error: result.ok
-              ? {
-                  ok: false,
-                  error:
-                    "The live stats could not be loaded right now.",
-                }
-              : result,
+          setState((currentState) => {
+            // Keep displaying existing data if only a refresh failed.
+            if (currentState.data) {
+              return currentState;
+            }
+
+            return {
+              error: result.ok
+                ? {
+                    ok: false,
+                    error:
+                      "The live stats could not be loaded right now.",
+                  }
+                : result,
+            };
           });
 
           return;
@@ -358,19 +370,52 @@ export default function LeetCodeStats() {
 
         console.error("Could not load LeetCode stats:", error);
 
-        setState({
-          error: {
-            ok: false,
-            error:
-              "The live stats could not be loaded right now.",
-          },
+        setState((currentState) => {
+          // Do not replace visible data with an error during
+          // a temporary refresh failure.
+          if (currentState.data) {
+            return currentState;
+          }
+
+          return {
+            error: {
+              ok: false,
+              error:
+                "The live stats could not be loaded right now.",
+            },
+          };
         });
+      } finally {
+        requestInProgress = false;
       }
     }
 
     void loadStats();
 
-    return () => controller.abort();
+    const intervalId = window.setInterval(() => {
+      void loadStats();
+    }, 30_000);
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        void loadStats();
+      }
+    }
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange,
+    );
+
+    return () => {
+      controller.abort();
+      window.clearInterval(intervalId);
+
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange,
+      );
+    };
   }, []);
 
   if (state.error) {

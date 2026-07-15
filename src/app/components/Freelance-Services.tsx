@@ -9,7 +9,7 @@ export default function FreelanceServices() {
       </h2>
 
       <p className="text-[#8f82b0] font-medium">
-        For businesses who need a website that works as hard as they do.
+        Websites that work as hard as you do.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

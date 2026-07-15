@@ -100,9 +100,8 @@ export default function Experience() {
         role={"Freelance Web/Software Developer"}
         date={"2025 — Present"}
         descriptions={[
-          "Building websites and web applications for clients based on their business goals and project needs.",
-          "Taking projects from initial planning through development, launch, and ongoing improvements.",
-          "Managing deployment, performance, SEO, and ongoing maintainability across each project."
+          "Translating business needs into polished web experiences — site structure, responsive UI implementation, and content organization.",
+          "Owning deployment plus SEO and performance considerations so each site is fast, discoverable, and easy to maintain."
         ]}
         techStack={[
           "Next.js / React",
