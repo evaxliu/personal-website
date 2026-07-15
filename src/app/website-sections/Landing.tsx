@@ -2,12 +2,11 @@ import NavCard from "../components/Nav-Card";
 import GetInTouch from "../components/Get-In-Touch";
 import SocialButton from "../components/Social-Button";
 import Surprise from "./Surprise";
-import LeetCodeStats from "../components/Leetcode-Stats";
 
 const links = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/el02/" },
   { name: "GitHub", href: "https://github.com/evaxliu" },
-  { name: "Resume", href: "EvaLiuResume.pdf" }
+  { name: "Resume", href: "/EvaLiuResume.pdf" }
 ]
 
 export default function Landing() {
@@ -21,9 +20,7 @@ export default function Landing() {
       </p>
 
       <div className="flex gap-3">
-        <Surprise>
-          <LeetCodeStats />
-        </Surprise>
+        <Surprise />
 
         <p className="text-5xl text-white font-bold">
           Eva Liu
