@@ -7,25 +7,41 @@ export default function ContactForm() {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    formData.append("access_key", "4987eae9-12c3-4233-910b-8784d8a05729");
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
-    });
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    const data = await response.json();
-    setIsSuccess(data.success);
-    if (data.success) {
+    formData.append(
+      "access_key",
+      "4987eae9-12c3-4233-910b-8784d8a05729"
+    );
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSuccess(true);
+        setResult(
+          "Thanks for reaching out! I’ll review your message and get back to you within 1–2 business days."
+        );
+
+        form.reset();
+      } else {
+        setIsSuccess(false);
+        setResult(
+          "Something went wrong while sending your message. Please try again in a moment."
+        );
+      }
+    } catch {
+      setIsSuccess(false);
       setResult(
-      data.success
-        ? "Thanks for reaching out! I’ll review your message and get back to you within 1–2 business days."
-        : "Something went wrong while sending your message. Please try again in a moment."
+        "Something went wrong while sending your message. Please try again in a moment."
       );
-      event.currentTarget.reset();
-    } else {
-      setResult("Error");
     }
   };
 
