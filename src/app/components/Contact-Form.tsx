@@ -50,6 +50,7 @@ export default function ContactForm() {
       <div className="flex gap-3">
         <input type="text" name="name" required placeholder="Name" className="flex border border-[#322851] bg-[#1F1838] rounded-2xl p-3 shrink w-full" />
         <input type="email" name="email" required placeholder="Email" className="flex border border-[#322851] bg-[#1F1838] rounded-2xl p-3 shrink w-full" />
+        <input type="checkbox" name="botcheck" className="hidden"/>
       </div>
       <div className="flex flex-col gap-3">
         <div className="h-40 w-full overflow-hidden rounded-2xl border border-[#322851] bg-[#1F1838]">
