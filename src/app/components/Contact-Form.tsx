@@ -17,12 +17,16 @@ export default function ContactForm() {
 
     const data = await response.json();
     setIsSuccess(data.success);
-
-    setResult(
+    if (data.success) {
+      setResult(
       data.success
         ? "Thanks for reaching out! I’ll review your message and get back to you within 1–2 business days."
         : "Something went wrong while sending your message. Please try again in a moment."
-    );
+      );
+      event.currentTarget.reset();
+    } else {
+      setResult("Error");
+    }
   };
 
   return (
