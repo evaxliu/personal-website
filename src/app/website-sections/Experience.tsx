@@ -24,15 +24,15 @@ export default function Experience() {
   const FreelanceProjects = [
     [
       "ZV Homeconstruction LLC",
-      "In Progress",
-      "",
+      "Live website ↗",
+      "https://www.zvhomes.org",
       "",
       "ZV Homeconstruction company website preview",
     ],
     [
       "Rice Thoughts Blog",
-      "In Progress",
-      "https://ricethoughts.com/",
+      "Current Live Iteration ↗",
+      "https://www.ricethoughts.com/",
       "",
       "Rice Thoughts blog homepage and article layout",
     ],
