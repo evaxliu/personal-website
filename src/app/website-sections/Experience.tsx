@@ -103,7 +103,7 @@ export default function Experience() {
           "Provide project-based software development for businesses and independent clients, with work spanning custom websites, web applications, deployment, hosting, and technical support.",
           "Translating client goals and broad requirements into practical technical plans.",
           "Handle projects from initial discovery through implementation, deployment, and launch.",
-          "Support existing websites and codebases through troubleshooting, performance improvements, and feature development."
+          "Support existing websites and codebases through troubleshooting, performance improvements, and feature development.",
           "Built and launched a custom website for a construction business, including responsive development, contact functionality, hosting, and domain setup."
         ]}
         techStack={[
