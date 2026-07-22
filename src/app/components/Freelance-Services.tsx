@@ -9,15 +9,15 @@ export default function FreelanceServices() {
       </h2>
 
       <p className="text-[#8f82b0] font-medium">
-        Websites that work as hard as you do.
+        Websites, web applications, and custom software built around your goals.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <ServicesCard title={"Marketing & business sites"} description={"Polished, responsive websites that organize your services clearly and turn visitors into inquiries."} />
+        <ServicesCard title={"Websites & web applications"} description={"Responsive, maintainable experiences designed for your business and users."} />
 
-        <ServicesCard title={"Design → live site"} description={"Site structure, responsive UI, and content organization — translating what your business needs into a real web experience."} />
+        <ServicesCard title={"Features & integrations"} description={"New functionality, APIs, third-party services, and improvements to existing software."} />
 
-        <ServicesCard title={"Deploy, SEO & performance"} description={"Fast, discoverable deployment with SEO and performance care so your site works from day one."} />
+        <ServicesCard title={"Launch & technical support"} description={"Deployment, performance, SEO, troubleshooting, and ongoing improvements."} />
       </div>
 
       <div className="flex items-center gap-3 text-sm">
