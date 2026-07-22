@@ -6,7 +6,7 @@ My portfolio website for software engineering opportunities and freelance web de
 
 ## Overview
 
-I built this site to give hiring teams and potential clients one place to understand my experience, view my work, and contact me. It highlights my software engineering background, research software projects, independent projects, and freelance web development services.
+I built this site to give hiring teams and potential clients one place to understand my experience, view my work, and contact me. It highlights my software engineering background, research software projects, independent projects, and freelance software development services.
 
 ## Highlights
 
@@ -15,7 +15,7 @@ I built this site to give hiring teams and potential clients one place to unders
 * Reusable components for experience, projects, service information, navigation, and contact
 * Direct links to source code, live projects, my resume, GitHub, and LinkedIn
 * Contact form powered by Web3Forms
-* SEO and Open Graph metadata with Vercel Analytics
+* SEO and Open Graph metadata
 
 ## Built With
 
@@ -25,7 +25,6 @@ I built this site to give hiring teams and potential clients one place to unders
 * [Tailwind CSS](https://tailwindcss.com/)
 * [Lucide React](https://lucide.dev/)
 * [Web3Forms](https://web3forms.com/)
-* [Vercel Analytics](https://vercel.com/analytics)
 
 ## Project Structure
 
