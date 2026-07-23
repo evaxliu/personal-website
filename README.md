@@ -2,7 +2,7 @@
 
 My portfolio website for software engineering opportunities and freelance web development work.
 
-**Live site:** [evaxliu.com](https://www.evaxliu.com)
+**Live site:** [evaxliu.com](https://evaxliu.com)
 
 ## Overview
 
