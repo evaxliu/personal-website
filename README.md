@@ -2,7 +2,7 @@
 
 My portfolio website for software engineering opportunities and freelance web development work.
 
-**Live site:** [lilacplanet.dev](https://www.lilacplanet.dev)
+**Live site:** [evaxliu.com](https://www.evaxliu.com)
 
 ## Overview
 
