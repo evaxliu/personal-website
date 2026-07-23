@@ -29,11 +29,11 @@ export default function Landing() {
 
       <div className="flex flex-col gap-5 max-w-2xl">
         <h1 className="text-xl text-white font-bold">
-          Software Engineer & Freelance Software Engineer
+          Software Engineer — available for full-time roles and freelance projects
         </h1>
 
         <p className="text-md leading-8 text-violet-200 font-semibold">
-          UW Allen School CS grad. I build web applications, research tools, custom websites, and software for businesses and organizations.
+          UW Allen School CS grad. I ship software for engineering teams and businesses alike — web applications, research tools, custom websites, and features that go from idea to production.
         </p>
       </div>
 
@@ -47,17 +47,17 @@ export default function Landing() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <NavCard 
-          title={"Software Engineer available for full-time roles."}
-          description={"Building user-facing software from planning to launch."}
+          title={"Hiring for a software engineering role?"}
+          description={"Led and shipped full-stack products — React/TypeScript, HTML, CSS and Python, owned from roadmap through architecture, code review, and production."}
           link={"See Experience"}
           url={"engineering"}
           accentColor={"violet"}
         />
 
         <NavCard 
-          title={"Freelance Software Development"}
-          description={"Custom development for websites, web applications, product features, integrations, and existing software."}
-          link={"See Services"} 
+          title={"Need software built for your business?"}
+          description={"I build websites, and custom software for your business — and handle the technical side, from setup to launch. You get one clear price before any work starts."}
+          link={"See Services & Client Work"} 
           url={"freelance"}
           accentColor={"green"}
         />

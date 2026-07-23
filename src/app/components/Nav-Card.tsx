@@ -36,9 +36,9 @@ export default function NavCard({title, description, link, url, accentColor} : c
         </p>
       </section>
       
-      <p className={`flex items-center mt-auto font-bold text-xs`}>
+      <p className={`flex items-center mt-auto font-bold text-xs gap-1`}>
         {link}
-        <ArrowDown />
+        <ArrowDown size={20}/>
       </p>
     </div>
   );

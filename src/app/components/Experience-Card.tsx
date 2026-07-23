@@ -48,21 +48,24 @@ export default function ExperienceCard({company, role, date, descriptions, accen
         )}
       </ul>
 
-      <div className="flex h-px bg-[#2b2148] w-full" />
-
-      <div className="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-2">
-        {projects?.map((project, idx) => (
-          <ProjectCard
-            key={idx}
-            title={project[0]}
-            projLinkTitle={project[1]}
-            projectLink={project[2]}
-            codeLink={project[3]}
-            // imageSrc={project[4]}
-            imageAlt={project[5]}
-          />
-        ))}
-      </div>
+      {projects && 
+        <>
+          <div className="flex h-px bg-[#2b2148] w-full" />
+          <div className="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-2">
+            {projects.map((project, idx) => (
+              <ProjectCard
+                key={idx}
+                title={project[0]}
+                projLinkTitle={project[1]}
+                projectLink={project[2]}
+                codeLink={project[3]}
+                // imageSrc={project[4]}
+                imageAlt={project[5]}
+              />
+            ))}
+          </div>
+        </>
+      }
     </section>
   );
 }
