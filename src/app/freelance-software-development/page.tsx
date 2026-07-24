@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FreelanceServices from "../components/Freelance-Services";
 import { ArrowLeft } from "lucide-react";
+import Faq from "../components/FAQ";
 
 export default function Freelance() {
   return(
@@ -34,6 +35,8 @@ export default function Freelance() {
         </div>
         
         <FreelanceServices />
+
+        <Faq />
       </div>
     </section>
   );

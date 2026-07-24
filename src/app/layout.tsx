@@ -3,15 +3,15 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 
-const siteUrl = "https://www.lilacplanet.dev";
+const siteUrl = "https://evaxliu.com";
 
 const siteDescription =
-  "Eva Liu is a UW CS graduate, software engineer, and freelance web developer building responsive full-stack websites.";
+  "UW CS graduate and software engineer building web applications, research tools, custom websites, and production-ready features for engineering teams and businesses.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
-  title: "Eva Liu ✦ Software Engineer & Freelance Web Developer",
+  title: "Eva Liu ✦ Software Engineer & Freelance Developer",
 
   description: siteDescription,
 
@@ -33,20 +33,27 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Eva Liu ✦ Software Engineer & Freelance Web Developer",
+    title: "Eva Liu ✦ Software Engineer & Freelance Developer",
     description: siteDescription,
     url: siteUrl,
     siteName: "Eva Liu",
     images: [
       {
-        url: "/open-graph-image.png",
+        url: "/OG-image.png",
         width: 1200,
         height: 630,
-        alt: "Eva Liu: Software Engineer and Freelance Web Developer",
+        alt: "Eva Liu — Software Engineer available for full-time roles and freelance projects",
       },
     ],
     locale: "en_US",
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Eva Liu ✦ Software Engineer & Freelance Developer",
+    description: siteDescription,
+    images: ["/OG-image.png"],
   },
 };
 
@@ -70,7 +77,8 @@ const jsonLd = {
       "@type": "ProfilePage",
       "@id": `${siteUrl}/#profile-page`,
       url: `${siteUrl}/`,
-      name: "Eva Liu — Software Engineer & Freelance Web Developer",
+      name: "Eva Liu — Software Engineer & Freelance Developer",
+      description: siteDescription,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
@@ -85,8 +93,8 @@ const jsonLd = {
       name: "Eva Liu",
       url: `${siteUrl}/`,
       description:
-        "Software engineer and freelance web developer building reliable, user-friendly software for teams, businesses, and clients.",
-      jobTitle: ["Software Engineer", "Freelance Web Developer"],
+        "Software engineer available for full-time roles and freelance projects, building web applications, research tools, custom websites, and production-ready features.",
+      jobTitle: ["Software Engineer", "Freelance Software Developer"],
       sameAs: [
         "https://github.com/evaxliu",
         "https://www.linkedin.com/in/el02/",

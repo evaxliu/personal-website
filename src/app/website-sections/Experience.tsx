@@ -27,7 +27,7 @@ export default function Experience() {
       "zvhomes.org ↗",
       "https://www.zvhomes.org",
       "",
-      "/projects/in-progress.webp",
+      "/projects/preview-zv.webp",
       "ZV Homeconstruction company website preview",
     ],
     [
