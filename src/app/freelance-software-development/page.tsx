@@ -11,7 +11,7 @@ export default function Freelance() {
           className="flex items-center self-start font-plex-mono text-sm text-violet-300 select-none
             hover:text-violet-200 transition-colors duration-200"
         >
-          <ArrowLeft /> lilacplanet.dev
+          <ArrowLeft /> evaxliu.com
         </Link>
         
         <p className="inline-flex items-center gap-x-1.5 rounded-full px-4 py-1.5 text-xs text-green-300 bg-green-950 ring-1 ring-inset ring-green-950 font-bold">
@@ -29,7 +29,7 @@ export default function Freelance() {
 
         <div className="flex flex-col gap-5 max-w-2xl">
           <p className="text-md leading-8 text-violet-200 font-semibold">
-            Websites, web applications, and software features for businesses — one fixed quote, no surprises, launched end to end.
+            Websites, web applications, and software features for businesses — scoped and priced upfront, then launched end to end.
           </p>
         </div>
         

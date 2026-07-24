@@ -56,7 +56,7 @@ export default function Landing() {
 
         <NavCard 
           title={"Need software built for your business?"}
-          description={"I build websites, and custom software for your business — and handle the technical side, from setup to launch. You get one clear price before any work starts."}
+          description={"I build websites, and custom software for your business — and handle the technical side, from setup to launch. Upfront pricing before any work starts."}
           link={"See Services & Client Work"} 
           url={"freelance"}
           accentColor={"green"}

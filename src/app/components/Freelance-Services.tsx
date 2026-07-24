@@ -29,12 +29,12 @@ const Process = [
     "Just bring your idea."
   ],
   [
-    "02 Fixed quote",
-    "Scope, timeline, price — in writing."
+    "02 Scope & quote",
+    "The agreed scope, timeline, and price — in writing."
   ],
   [
     "03 Build & launch",
-    "You review, we ship — you own everything."
+    "You review, I launch — with a clear handoff."
   ]
 ]
 
@@ -64,7 +64,7 @@ export default function FreelanceServices() {
 
           <ServicesCard title={"Debugging & troubleshooting"} description={"Bugs found, fixed, and explained in plain terms."} />
 
-          <ServicesCard title={"Hosting, deployment & support"} description={"Deployment, performance, and SEO — launch handled, you own everything. Ongoing maintenance available as a separate arrangement."} />
+          <ServicesCard title={"Hosting, deployment & support"} description={"Deployment, performance, and SEO handled through launch, with a clear handoff. Maintenance available separately."} />
         </div>
 
         <SectionHeader label={"WORK"} color={"green"} />
@@ -105,7 +105,7 @@ export default function FreelanceServices() {
           ))}
         </div>
 
-        <LetsWorkTogether heading={"Start with a conversation"} subheading={"Free 30-minute call — walk away with a plan and a fixed quote, no strings attached."} />
+        <LetsWorkTogether heading={"Start with a conversation"} subheading={"Free 30-minute call, no strings attached — walk away with a plan and an upfront quote based on the scope discussed."} />
       </div>
     </section>
   );
