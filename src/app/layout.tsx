@@ -1,7 +1,7 @@
 import "./globals.css";
 
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
+import Footer from "./components/Footer";
 
 const siteUrl = "https://evaxliu.com";
 
@@ -124,8 +124,11 @@ export default function RootLayout({
 
         <main>
           {children}
-          <Analytics />
         </main>
+
+        <div className="flex items-center flex-col">
+          <Footer />
+        </div>
       </body>
     </html>
   );

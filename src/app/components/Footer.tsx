@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="flex flex-col md:flex-row gap-7 w-full max-w-3xl px-10 py-15 justify-between text-sm">
       <div>
         <p className="text-[#8f82b0] font-semibold">
-          Eva Liu · lilacplanet.dev ✦
+          Eva Liu · evaxliu.com ✦
         </p>
       </div>
 

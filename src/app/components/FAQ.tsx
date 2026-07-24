@@ -5,23 +5,23 @@ import { useState } from "react";
 const FAQS = [
   {
     q: "How much does a project cost?",
-    a: "After our intro call you'll get upfront pricing for a clearly agreed-upon scope — no hourly surprises within that scope. If you later want work beyond what we agreed on, I'll price that separately so you always know what you're paying for before it starts.",
+    a: "After our intro call, you'll receive upfront pricing for a clearly agreed-upon scope, with no hourly surprises within that scope. If you later want work beyond what we agreed on, I'll price it separately before any additional work begins.",
   },
   {
     q: "How long does it take?",
-    a: "A focused marketing site is usually 2–4 weeks from kickoff to launch. Web apps depend on scope, but I'll give you a realistic timeline alongside the pricing and keep you updated as we go.",
+    a: "Timelines depend on the scope, but I'll provide a realistic estimate alongside the pricing and keep you updated throughout the project.",
   },
   {
     q: "Who owns the code?",
-    a: "You get a license to use the code for your project, plus a clear handoff of everything you need to run it. I retain the right to reuse the code in future work and to reference the project when talking about what I've built.",
+    a: "You'll receive the complete source code and a permanent license to use, modify, maintain, and continue developing it, including through another developer. I retain ownership of the code so I can reuse general-purpose portions in future projects and reference the work in my portfolio or during interviews, excluding any confidential information.",
   },
   {
     q: "What if I don't know exactly what I need yet?",
-    a: "That's what the free 15-minute call is for. Bring the idea and the problem you're solving — I'll help shape it into a concrete scope, then send a plan and pricing so you can decide with no pressure.",
+    a: "That's what the free 30-minute call is for. Bring your idea and the problem you're trying to solve, and I'll help shape it into a clear scope. Afterwards, I'll send you a plan and pricing so you can decide with no pressure.",
   },
   {
     q: "Do you offer ongoing support after launch?",
-    a: "Yes. Every project ends with a clear handoff, and I can handle hosting, updates, and small changes on a simple monthly arrangement or ad-hoc when something comes up — whatever fits how hands-on you want to be.",
+    a: "Ongoing support is available as a separate service. I can help with hosting, updates, troubleshooting, and small changes through a monthly support plan or on an as-needed basis.",
   },
 ];
 

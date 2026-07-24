@@ -6,7 +6,7 @@ import Faq from "../components/FAQ";
 export default function Freelance() {
   return(
     <section className="flex justify-center items-center flex-col">
-      <div className="flex flex-col items-start justify-center gap-7 w-full max-w-3xl p-10">
+      <div className="flex flex-col items-start justify-center gap-7 w-full max-w-3xl px-10 pt-10">
         <Link
           href="/"
           className="flex items-center self-start font-plex-mono text-sm text-violet-300 select-none
